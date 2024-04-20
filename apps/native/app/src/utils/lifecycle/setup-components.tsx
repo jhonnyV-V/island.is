@@ -18,6 +18,7 @@ import { LicenseScannerScreen } from '../../screens/license-scanner/license-scan
 import { LoginScreen } from '../../screens/login/login'
 import { TestingLoginScreen } from '../../screens/login/testing-login'
 import { MoreScreen } from '../../screens/more/more'
+import { PasskeyScreen } from '../../screens/passkey/passkey'
 import { PersonalInfoScreen } from '../../screens/more/personal-info'
 import { NotificationDetailScreen } from '../../screens/notification-detail/notification-detail'
 import { NotificationsScreen } from '../../screens/notifications/notifications'
@@ -89,4 +90,5 @@ export function registerAllComponents() {
   registerComponent(CR.FinanceStatusDetailScreen, FinanceStatusDetailScreen)
   registerComponent(CR.InboxFilterScreen, InboxFilterScreen)
   registerComponent(CR.AirDiscountScreen, AirDiscountScreen)
+  registerComponent(CR.PasskeyScreen, PasskeyScreen)
 }
