@@ -28,6 +28,7 @@ import {
 } from 'react-native-navigation'
 import { useTheme } from 'styled-components/native'
 import editIcon from '../../assets/icons/edit.png'
+import chevronForward from '../../ui/assets/icons/chevron-forward.png'
 import { PressableHighlight } from '../../components/pressable-highlight/pressable-highlight'
 import { client } from '../../graphql/client'
 import {
@@ -75,6 +76,7 @@ export const SettingsScreen: NavigationFunctionComponent = ({
     useBiometrics,
     setUseBiometrics,
     appLockTimeout,
+    hasCreatedPasskey,
   } = usePreferencesStore()
   const [loadingCP, setLoadingCP] = useState(false)
   const [localPackage, setLocalPackage] = useState<LocalPackage | null>(null)
@@ -97,6 +99,36 @@ export const SettingsScreen: NavigationFunctionComponent = ({
   const [documentNotifications, setDocumentNotifications] = useState(
     userProfile.data?.getUserProfile?.documentNotifications,
   )
+
+  const onRemovePasskeyPress = () => {
+    return RNAlert.alert(
+      intl.formatMessage({ id: 'settings.security.removePasskeyPromptTitle' }),
+      intl.formatMessage({
+        id: 'settings.security.removePasskeyPromptDescription',
+      }),
+      [
+        {
+          text: intl.formatMessage({
+            id: 'settings.security.removePasskeyCancelButton',
+          }),
+          style: 'cancel',
+        },
+        {
+          text: intl.formatMessage({
+            id: 'settings.security.removePasskeyButton',
+          }),
+          style: 'destructive',
+          onPress: () => {
+            preferencesStore.setState({
+              hasCreatedPasskey: false,
+            })
+            // TODO: remove passkey
+            console.log('remove passkey')
+          },
+        },
+      ],
+    )
+  }
 
   const onLanguagePress = () => {
     showPicker({
@@ -395,6 +427,12 @@ export const SettingsScreen: NavigationFunctionComponent = ({
               subtitle={intl.formatMessage({
                 id: 'settings.security.changePinDescription',
               })}
+              accessory={
+                <Image
+                  source={chevronForward}
+                  style={{ width: 24, height: 24 }}
+                />
+              }
             />
           </PressableHighlight>
           <TableViewCell
@@ -451,6 +489,32 @@ export const SettingsScreen: NavigationFunctionComponent = ({
               />
             }
           />
+          <PressableHighlight
+            onPress={() => {
+              hasCreatedPasskey
+                ? onRemovePasskeyPress()
+                : navigateTo('/passkey')
+            }}
+          >
+            <TableViewCell
+              title={intl.formatMessage({
+                id: hasCreatedPasskey
+                  ? 'settings.security.removePasskeyLabel'
+                  : 'settings.security.createPasskeyLabel',
+              })}
+              subtitle={intl.formatMessage({
+                id: hasCreatedPasskey
+                  ? 'settings.security.removePasskeyDescription'
+                  : 'settings.security.createPasskeyDescription',
+              })}
+              accessory={
+                <Image
+                  source={chevronForward}
+                  style={{ width: 24, height: 24 }}
+                />
+              }
+            />
+          </PressableHighlight>
           <PressableHighlight
             onPress={() => {
               showPicker({
@@ -525,6 +589,12 @@ export const SettingsScreen: NavigationFunctionComponent = ({
               subtitle={intl.formatMessage({
                 id: 'settings.security.privacySubTitle',
               })}
+              accessory={
+                <Image
+                  source={chevronForward}
+                  style={{ width: 24, height: 24 }}
+                />
+              }
             />
           </PressableHighlight>
         </TableViewGroup>
