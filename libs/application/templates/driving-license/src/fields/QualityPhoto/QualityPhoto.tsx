@@ -35,7 +35,8 @@ const Photo: FC<React.PropsWithChildren<QualityPhotoData>> = ({
   }
 
   //temp
-  const src = "https://images.ctfassets.net/8k0h54kbe6bj/5u0bSKny81QfKj3gC3tu0s/1415f3e408bd9097b8d5c8c4cfcc8425/Photolicense.png"
+  const src =
+    'https://images.ctfassets.net/8k0h54kbe6bj/5u0bSKny81QfKj3gC3tu0s/1415f3e408bd9097b8d5c8c4cfcc8425/Photolicense.png'
   return (
     <img
       className={image}
