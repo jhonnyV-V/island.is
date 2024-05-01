@@ -4,7 +4,7 @@
   "license": "MIT",
   "engines": {
     "npm": "please-use-yarn",
-    "node": "18.16.0",
+    "node": "20.12.2",
     "yarn": "3.2"
   },
   "repository": {
@@ -108,6 +108,7 @@
     "@nestjs/terminus": "10.2.0",
     "@react-pdf/renderer": "^3.1.9",
     "@rehooks/component-size": "1.0.3",
+    "@simplewebauthn/server": "10.0.0",
     "@sindresorhus/slugify": "1.0.0",
     "@statoscope/webpack-plugin": "5.20.1",
     "@storybook/core-server": "7.4.1",
@@ -477,7 +478,7 @@
     "@nestjs/terminus@10.2.0": "patch:@nestjs/terminus@npm%3A10.2.0#./.yarn/patches/@nestjs-terminus-npm-10.2.0-9e24c129e0.patch"
   },
   "volta": {
-    "node": "18.16.0",
+    "node": "20.12.2",
     "yarn": "3.2.3"
   },
   "packageManager": "yarn@3.2.3"
