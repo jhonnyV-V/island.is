@@ -50,9 +50,9 @@ interface VerifyResponse {
 }
 
 // Home
-export const IP_ADDRESS = '192.168.86.71'
+//export const IP_ADDRESS = '192.168.86.71'
 // Work
-//export const IP_ADDRESS = '192.168.1.36'
+export const IP_ADDRESS = '192.168.1.218'
 
 // Get registration options
 export const getRegistrationOptions =
