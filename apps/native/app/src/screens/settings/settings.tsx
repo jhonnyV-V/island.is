@@ -127,7 +127,7 @@ export const SettingsScreen: NavigationFunctionComponent = ({
             preferencesStore.setState({
               hasCreatedPasskey: false,
             })
-            // TODO: remove passkey
+            // TODO: call remove passkey endpoint
             console.log('remove passkey')
           },
         },
