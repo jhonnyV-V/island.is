@@ -9,7 +9,7 @@ import { GetFinanceStatus } from '../../graphql/types/finance.types'
 import { useGetFinanceStatusQuery } from '../../graphql/types/schema'
 import { createNavigationOptionHooks } from '../../hooks/create-navigation-option-hooks'
 import { useConnectivityIndicator } from '../../hooks/use-connectivity-indicator'
-import { openBrowser } from '../../lib/rn-island'
+import { useBrowser } from '../../lib/useBrowser'
 import { FinanceStatusCardContainer } from './components/finance-status-card-container'
 import { LightButton } from './components/light-button'
 
@@ -39,6 +39,7 @@ export const FinanceScreen: NavigationFunctionComponent = ({ componentId }) => {
   useNavigationOptions(componentId)
   useConnectivityIndicator({ componentId })
 
+  const { openBrowser } = useBrowser()
   const theme = useTheme()
   const intl = useIntl()
   const res = useGetFinanceStatusQuery({

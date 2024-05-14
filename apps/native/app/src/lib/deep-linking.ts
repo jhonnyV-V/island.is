@@ -4,7 +4,7 @@ import create, { State } from 'zustand/vanilla'
 import { bundleId } from '../config'
 import { notificationsStore } from '../stores/notifications-store'
 import { ComponentRegistry, MainBottomTabs } from '../utils/component-registry'
-import { openBrowser } from './rn-island'
+import { openNativeBrowser } from './rn-island'
 
 export type RouteCallbackArgs =
   | boolean
@@ -204,7 +204,8 @@ export function navigateToNotification(
           },
         })
       }
-      openBrowser(link, componentId ?? ComponentRegistry.HomeScreen)
+      // TODO: When navigating to a link from notification works, implement a way to use useBrowser.openBrowser here
+      openNativeBrowser(link, componentId ?? ComponentRegistry.HomeScreen)
     }
   }
 }

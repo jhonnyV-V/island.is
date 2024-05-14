@@ -35,7 +35,7 @@ import { ApplicationsModule } from './applications-module'
 import { NotificationsModule } from './notifications-module'
 import { OnboardingModule } from './onboarding-module'
 import { VehiclesModule } from './vehicles-module'
-import { openBrowser } from '../../lib/rn-island'
+import { useBrowser } from '../../lib/useBrowser'
 
 interface ListItem {
   id: string
@@ -105,6 +105,7 @@ export const MainHomeScreen: NavigationFunctionComponent = ({
   useNavigationOptions(componentId)
 
   const [refetching, setRefetching] = useState(false)
+  const { openBrowser } = useBrowser()
   const flatListRef = useRef<FlatList>(null)
   const ui = useUiStore()
 
