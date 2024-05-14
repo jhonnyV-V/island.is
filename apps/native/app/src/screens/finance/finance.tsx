@@ -12,7 +12,6 @@ import { useConnectivityIndicator } from '../../hooks/use-connectivity-indicator
 import { openBrowser } from '../../lib/rn-island'
 import { FinanceStatusCardContainer } from './components/finance-status-card-container'
 import { LightButton } from './components/light-button'
-import { useFeatureFlag } from '../../contexts/feature-flag-provider'
 
 const { useNavigationOptions, getNavigationOptions } =
   createNavigationOptionHooks(
@@ -42,7 +41,6 @@ export const FinanceScreen: NavigationFunctionComponent = ({ componentId }) => {
 
   const theme = useTheme()
   const intl = useIntl()
-  const isPasskeyEnabled = useFeatureFlag('isPasskeyEnabled', false)
   const res = useGetFinanceStatusQuery({
     errorPolicy: 'ignore',
   })
@@ -168,7 +166,6 @@ export const FinanceScreen: NavigationFunctionComponent = ({ componentId }) => {
                 '',
               )}/umsoknir/greidsluaaetlun`,
               componentId,
-              isPasskeyEnabled,
             )
           }}
         />

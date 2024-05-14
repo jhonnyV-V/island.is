@@ -36,7 +36,6 @@ import { NotificationsModule } from './notifications-module'
 import { OnboardingModule } from './onboarding-module'
 import { VehiclesModule } from './vehicles-module'
 import { openBrowser } from '../../lib/rn-island'
-import { IP_ADDRESS } from '../../lib/passkeys/server'
 
 interface ListItem {
   id: string
@@ -108,8 +107,6 @@ export const MainHomeScreen: NavigationFunctionComponent = ({
   const [refetching, setRefetching] = useState(false)
   const flatListRef = useRef<FlatList>(null)
   const ui = useUiStore()
-
-  const isPasskeyEnabled = useFeatureFlag('isPasskeyEnabled', false)
 
   useActiveTabItemPress(2, () => {
     flatListRef.current?.scrollToOffset({ offset: -150, animated: true })
@@ -206,11 +203,7 @@ export const MainHomeScreen: NavigationFunctionComponent = ({
             <Button
               title={'Opna mínar síður'}
               onPress={() =>
-                openBrowser(
-                  `http://${IP_ADDRESS}:8000/logged-in`,
-                  componentId,
-                  isPasskeyEnabled,
-                )
+                openBrowser('http://island.is:8000/minarsidur', componentId)
               }
             />
           </View>
