@@ -33,8 +33,7 @@ import { ApplicationsModule } from './applications-module'
 import { NotificationsModule } from './notifications-module'
 import { OnboardingModule } from './onboarding-module'
 import { VehiclesModule } from './vehicles-module'
-import { openBrowser } from '../../lib/rn-island'
-import { IP_ADDRESS } from '../../lib/passkeys/server'
+import { useBrowser } from '../../lib/useBrowser'
 
 interface ListItem {
   id: string
@@ -102,6 +101,9 @@ export const MainHomeScreen: NavigationFunctionComponent = ({
   componentId,
 }) => {
   useNavigationOptions(componentId)
+
+  const [refetching, setRefetching] = useState(false)
+  const { openBrowser } = useBrowser()
   const flatListRef = useRef<FlatList>(null)
   const ui = useUiStore()
 
@@ -194,11 +196,7 @@ export const MainHomeScreen: NavigationFunctionComponent = ({
             <Button
               title={'Opna mínar síður'}
               onPress={() =>
-                openBrowser(
-                  `http://${IP_ADDRESS}:8000/logged-in`,
-                  componentId,
-                  isPasskeyEnabled,
-                )
+                openBrowser(`http://${IP_ADDRESS}:8000/logged-in`, componentId)
               }
             />
           </View>

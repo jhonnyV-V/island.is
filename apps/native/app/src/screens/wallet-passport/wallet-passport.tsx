@@ -26,7 +26,7 @@ import IconStatusNonVerified from '../../assets/icons/warning.png'
 import { useFeatureFlag } from '../../contexts/feature-flag-provider'
 import { useGetIdentityDocumentQuery } from '../../graphql/types/schema'
 import { createNavigationOptionHooks } from '../../hooks/create-navigation-option-hooks'
-import { openBrowser } from '../../lib/rn-island'
+import { useBrowser } from '../../lib/useBrowser'
 
 const Information = styled.ScrollView`
   flex: 1;
@@ -91,7 +91,7 @@ export const WalletPassportScreen: NavigationFunctionComponent<{
   cardHeight?: number
 }> = ({ id, componentId, cardHeight = 140 }) => {
   useNavigationOptions(componentId)
-
+  const { openBrowser } = useBrowser()
   const showChildrenPassport = useFeatureFlag(
     'isChildrenPassportEnabled',
     false,
