@@ -56,10 +56,6 @@ class ConfigCatAsyncStorageCache {
   }
 }
 
-// Temporary way to get feature flag values in openBrowser.
-// Consider removing when not needed anymore.
-export let featureFlagClient: configcat.IConfigCatClient | null = null
-
 export const FeatureFlagProvider: FC<
   React.PropsWithChildren<FeatureFlagContextProviderProps>
 > = ({ children }) => {
@@ -67,7 +63,7 @@ export const FeatureFlagProvider: FC<
   const [time, setTime] = useState(Date.now())
   const { environment = environments.prod } = useEnvironmentStore()
 
-  const client = useMemo(() => {
+  const featureFlagClient = useMemo(() => {
     return configcat.getClient(
       environment.configCat ?? '',
       configcat.PollingMode.AutoPoll,
@@ -78,16 +74,15 @@ export const FeatureFlagProvider: FC<
       },
     )
   }, [environment])
-  featureFlagClient = client
 
   useEffect(() => {
     const listener = () => setTime(Date.now())
-    client.addListener('configChanged', listener)
+    featureFlagClient.addListener('configChanged', listener)
 
     return () => {
-      client.removeListener('configChanged', listener)
+      featureFlagClient.removeListener('configChanged', listener)
     }
-  }, [client])
+  }, [featureFlagClient])
 
   const context = useMemo<FeatureFlagClient>(() => {
     const userAuth =
@@ -106,12 +101,12 @@ export const FeatureFlagProvider: FC<
         defaultValue: boolean | string,
         user: FeatureFlagUser | undefined = userAuth,
       ) {
-        return client.getValueAsync(key, defaultValue, user)
+        return featureFlagClient.getValueAsync(key, defaultValue, user)
       },
-      dispose: () => client.dispose(),
+      dispose: () => featureFlagClient.dispose(),
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [client, userInfo, time])
+  }, [featureFlagClient, userInfo, time])
 
   return (
     <FeatureFlagContext.Provider value={context}>
