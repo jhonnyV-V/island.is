@@ -204,7 +204,7 @@ export const MainHomeScreen: NavigationFunctionComponent = ({
             <Button
               title={'Opna mínar síður'}
               onPress={() =>
-                openBrowser('http://island.is:8000/minarsidur', componentId)
+                openBrowser('http://island.is/minarsidur', componentId)
               }
             />
           </View>
