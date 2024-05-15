@@ -16,6 +16,11 @@ import { getApolloClientAsync } from '../graphql/client'
 import { isAndroid } from '../utils/devices'
 import { getAppRoot } from '../utils/lifecycle/get-app-root'
 import { preferencesStore } from './preferences-store'
+import {
+  DeletePasskeyDocument,
+  DeletePasskeyMutation,
+  DeletePasskeyMutationVariables,
+} from '../graphql/types/schema'
 
 const KEYCHAIN_AUTH_KEY = `@islandis_${bundleId}`
 
@@ -136,6 +141,17 @@ export const authStore = create<AuthStore>((set, get) => ({
     return false
   },
   async logout() {
+    const client = await getApolloClientAsync()
+
+    // remove passkey if exists
+    preferencesStore.setState({
+      hasCreatedPasskey: false,
+      hasOnboardedPasskeys: false,
+      lastUsedPasskey: 0,
+    })
+    await client.mutate<DeletePasskeyMutation, DeletePasskeyMutationVariables>({
+      mutation: DeletePasskeyDocument,
+    })
     const appAuthConfig = getAppAuthConfig()
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const tokenToRevoke = get().authorizeResult!.accessToken!
@@ -149,7 +165,6 @@ export const authStore = create<AuthStore>((set, get) => ({
       // NOOP
     }
 
-    const client = await getApolloClientAsync()
     await client.cache.reset()
     await Keychain.resetGenericPassword({ service: KEYCHAIN_AUTH_KEY })
     set(
