@@ -90,6 +90,12 @@ export const SettingsScreen: NavigationFunctionComponent = ({
   const isPasskeyEnabled = useFeatureFlag('isPasskeyEnabled', false)
 
   const onLogoutPress = async () => {
+    // remove passkey if exists
+    preferencesStore.setState({
+      hasCreatedPasskey: false,
+      hasOnboardedPasskeys: false,
+      lastUsedPasskey: 0,
+    })
     await deletePasskey()
     await authStore.getState().logout()
     await Navigation.dismissAllModals()
@@ -127,6 +133,7 @@ export const SettingsScreen: NavigationFunctionComponent = ({
             preferencesStore.setState({
               hasCreatedPasskey: false,
               hasOnboardedPasskeys: false,
+              lastUsedPasskey: 0,
             })
             await deletePasskey()
           },
