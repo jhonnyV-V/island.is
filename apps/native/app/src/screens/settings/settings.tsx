@@ -11,11 +11,11 @@ import { authenticateAsync } from 'expo-local-authentication'
 import React, { useEffect, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
 import {
-  Alert as RNAlert,
   Image,
   Linking,
   Platform,
   Pressable,
+  Alert as RNAlert,
   ScrollView,
   Switch,
   TouchableOpacity,
@@ -35,13 +35,13 @@ import {
   UpdateProfileDocument,
   UpdateProfileMutation,
   UpdateProfileMutationVariables,
+  useDeletePasskeyMutation,
   useGetProfileQuery,
 } from '../../graphql/types/schema'
 import { createNavigationOptionHooks } from '../../hooks/create-navigation-option-hooks'
 import { navigateTo } from '../../lib/deep-linking'
 import { showPicker } from '../../lib/show-picker'
 import { authStore } from '../../stores/auth-store'
-import { apolloMKKVStorage } from '../../stores/mkkv'
 import {
   preferencesStore,
   usePreferencesStore,
@@ -91,7 +91,7 @@ export const SettingsScreen: NavigationFunctionComponent = ({
   const isPasskeyEnabled = useFeatureFlag('isPasskeyEnabled', false)
 
   const onLogoutPress = async () => {
-    apolloMKKVStorage.clearStore()
+    await deletePasskey()
     await authStore.getState().logout()
     await Navigation.dismissAllModals()
     await Navigation.setRoot({
@@ -100,6 +100,7 @@ export const SettingsScreen: NavigationFunctionComponent = ({
   }
 
   const userProfile = useGetProfileQuery()
+  const [deletePasskey] = useDeletePasskeyMutation()
 
   const [documentNotifications, setDocumentNotifications] = useState(
     userProfile.data?.getUserProfile?.documentNotifications,
@@ -123,12 +124,12 @@ export const SettingsScreen: NavigationFunctionComponent = ({
             id: 'settings.security.removePasskeyButton',
           }),
           style: 'destructive',
-          onPress: () => {
+          onPress: async () => {
             preferencesStore.setState({
               hasCreatedPasskey: false,
+              hasOnboardedPasskeys: false,
             })
-            // TODO: call remove passkey endpoint
-            console.log('remove passkey')
+            await deletePasskey()
           },
         },
       ],
@@ -208,7 +209,6 @@ export const SettingsScreen: NavigationFunctionComponent = ({
         title={intl.formatMessage({ id: 'setting.screenTitle' })}
         onClosePress={() => Navigation.dismissModal(componentId)}
         style={{ marginHorizontal: 16 }}
-        showLoading={userProfile.loading && !!userProfile.data}
       />
       <ScrollView style={{ flex: 1 }} testID={testIDs.USER_SCREEN_SETTINGS}>
         <Alert
