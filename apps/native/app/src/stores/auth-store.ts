@@ -136,13 +136,6 @@ export const authStore = create<AuthStore>((set, get) => ({
     return false
   },
   async logout() {
-    // remove passkey if exists
-    preferencesStore.setState({
-      hasCreatedPasskey: false,
-      hasOnboardedPasskeys: false,
-    })
-    // TODO: Call remove passkey endpoint
-
     const appAuthConfig = getAppAuthConfig()
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const tokenToRevoke = get().authorizeResult!.accessToken!
