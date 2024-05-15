@@ -35,6 +35,7 @@ import {
   UpdateProfileDocument,
   UpdateProfileMutation,
   UpdateProfileMutationVariables,
+  useDeletePasskeyMutation,
   useGetProfileQuery,
 } from '../../graphql/types/schema'
 import { createNavigationOptionHooks } from '../../hooks/create-navigation-option-hooks'
@@ -89,6 +90,7 @@ export const SettingsScreen: NavigationFunctionComponent = ({
   const isPasskeyEnabled = useFeatureFlag('isPasskeyEnabled', false)
 
   const onLogoutPress = async () => {
+    await deletePasskey()
     await authStore.getState().logout()
     await Navigation.dismissAllModals()
     await Navigation.setRoot({
@@ -97,6 +99,7 @@ export const SettingsScreen: NavigationFunctionComponent = ({
   }
 
   const userProfile = useGetProfileQuery()
+  const [deletePasskey] = useDeletePasskeyMutation()
 
   const [documentNotifications, setDocumentNotifications] = useState(
     userProfile.data?.getUserProfile?.documentNotifications,
@@ -120,12 +123,12 @@ export const SettingsScreen: NavigationFunctionComponent = ({
             id: 'settings.security.removePasskeyButton',
           }),
           style: 'destructive',
-          onPress: () => {
+          onPress: async () => {
             preferencesStore.setState({
               hasCreatedPasskey: false,
+              hasOnboardedPasskeys: false,
             })
-            // TODO: call remove passkey endpoint
-            console.log('remove passkey')
+            await deletePasskey()
           },
         },
       ],
