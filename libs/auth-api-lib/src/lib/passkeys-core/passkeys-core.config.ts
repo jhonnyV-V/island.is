@@ -32,11 +32,11 @@ export const PasskeysCoreConfig = defineConfig({
         ssl: !isRunningOnEnvironment('local'),
       },
       passkey: {
-        rpId: env.required('PASSKEY_CORE_RP_ID', 'localhost'),
+        rpId: env.required('PASSKEY_CORE_RP_ID', 'island.is'),
         rpName: env.required('PASSKEY_CORE_RP_NAME', 'Island.is'),
         allowedOrigin: env.required(
           'PASSKEY_CORE_ALLOWED_ORIGIN',
-          'http://localhost:4200',
+          'https://island.is',
         ),
         challengeTtl: Number(
           env.required(
