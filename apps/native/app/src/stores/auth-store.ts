@@ -16,6 +16,7 @@ import { client } from '../graphql/client'
 import { isAndroid } from '../utils/devices'
 import { getAppRoot } from '../utils/lifecycle/get-app-root'
 import { preferencesStore } from './preferences-store'
+import { featureFlagClient } from '../contexts/feature-flag-provider'
 import {
   DeletePasskeyDocument,
   DeletePasskeyMutation,
@@ -141,17 +142,29 @@ export const authStore = create<AuthStore>((set, get) => ({
     return false
   },
   async logout() {
-    // const client = await getApolloClientAsync()
+    const userNationalId = get().userInfo?.nationalId
+    const isPasskeyEnabled = await featureFlagClient?.getValueAsync(
+      'isPasskeyEnabled',
+      false,
+      userNationalId ? { identifier: userNationalId } : undefined,
+    )
+    if (isPasskeyEnabled) {
+      preferencesStore.setState({
+        hasCreatedPasskey: false,
+        hasOnboardedPasskeys: false,
+        lastUsedPasskey: 0,
+      })
+      // Need to merge main into this branch to be able to use this code below
 
-    // remove passkey if exists
-    preferencesStore.setState({
-      hasCreatedPasskey: false,
-      hasOnboardedPasskeys: false,
-      lastUsedPasskey: 0,
-    })
-    // await client.mutate<DeletePasskeyMutation, DeletePasskeyMutationVariables>({
-    //   mutation: DeletePasskeyDocument,
-    // })
+      // const client = await getApolloClientAsync()
+      // await client.mutate<
+      //   DeletePasskeyMutation,
+      //   DeletePasskeyMutationVariables
+      // >({
+      //   mutation: DeletePasskeyDocument,
+      // })
+    }
+
     const appAuthConfig = getAppAuthConfig()
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const tokenToRevoke = get().authorizeResult!.accessToken!
