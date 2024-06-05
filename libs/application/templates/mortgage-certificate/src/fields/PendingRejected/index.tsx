@@ -12,7 +12,7 @@ import { MCEvents } from '../../lib/constants'
 import { useMutation } from '@apollo/client'
 import { PropertyDetail } from '@island.is/api/schema'
 import { useLocale } from '@island.is/localization'
-import { m } from '../../lib/messages'
+import { m } from '../../lib/messagess'
 
 export const PendingRejected: FC<React.PropsWithChildren<FieldBaseProps>> = ({
   application,

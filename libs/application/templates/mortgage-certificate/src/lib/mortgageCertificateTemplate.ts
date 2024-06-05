@@ -16,9 +16,8 @@ import {
   pruneAfterDays,
 } from '@island.is/application/core'
 import { Events, States, Roles, MCEvents } from './constants'
-import { z } from 'zod'
 import { ApiActions } from '../shared'
-import { m } from './messages'
+import { m } from './messagess'
 import {
   existsAndKMarking,
   exists,
@@ -32,16 +31,7 @@ import {
 import { AuthDelegationType } from '@island.is/shared/types'
 import { buildPaymentState } from '@island.is/application/utils'
 import { getChargeItemCodes } from '../util'
-
-const MortgageCertificateSchema = z.object({
-  approveExternalData: z.boolean().refine((v) => v),
-  selectProperty: z
-    .object({
-      propertyNumber: z.string().optional(),
-      isFromSearch: z.boolean().optional(),
-    })
-    .optional(),
-})
+import { MortgageCertificateSchema } from './dataSchema'
 
 const template: ApplicationTemplate<
   ApplicationContext,

@@ -166,6 +166,17 @@ export class SyslumennResolver {
     return this.syslumennService.getPropertyDetails(input.propertyNumber)
   }
 
+  @Query(() => [PropertyDetail], { nullable: true })
+  @Scopes(ApiScope.assets)
+  searchForAllProperties(
+    @Args('input') input: SearchForPropertyInput,
+  ): Promise<PropertyDetail[]> {
+    return this.syslumennService.getAllPropertyDetails(
+      input.propertyNumber,
+      input.propertyType ?? '0',
+    )
+  }
+
   @Directive(cacheControlDirective())
   @Query(() => EstateRelations)
   getSyslumennEstateRelations(): Promise<EstateRelations> {

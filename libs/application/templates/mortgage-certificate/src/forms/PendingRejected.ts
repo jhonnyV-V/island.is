@@ -5,7 +5,7 @@ import {
   buildSection,
 } from '@island.is/application/core'
 import { Form, FormModes } from '@island.is/application/types'
-import { m } from '../lib/messages'
+import { m } from '../lib/messagess'
 
 export const PendingRejected: Form = buildForm({
   id: 'PendingForm',

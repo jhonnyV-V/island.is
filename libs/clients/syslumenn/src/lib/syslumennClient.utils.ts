@@ -61,6 +61,7 @@ import {
   InheritanceReportAsset,
   InheritanceEstateMember,
   InheritanceReportInfo,
+  PropertyDetail,
 } from './syslumennClient.types'
 const UPLOAD_DATA_SUCCESS = 'Gögn móttekin'
 
@@ -79,6 +80,24 @@ export const mapDistrictCommissionersAgenciesResponse = (
     name: response.nafn ?? '',
     place: response.stadur ?? '',
     address: response.adsetur ?? '',
+  }
+}
+
+export const mapAllPropertiesDetailResponse = (
+  response: VedbandayfirlitReguverkiSvarSkeyti,
+): PropertyDetail => {
+  return {
+    propertyNumber: response.fastnum,
+    defaultAddress: {
+      display: response.heiti,
+    },
+    unitsOfUse: {
+      unitsOfUse: [
+        {
+          explanation: response.notkun,
+        },
+      ],
+    },
   }
 }
 

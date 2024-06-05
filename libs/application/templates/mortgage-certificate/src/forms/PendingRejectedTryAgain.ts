@@ -7,7 +7,7 @@ import {
   buildMultiField,
 } from '@island.is/application/core'
 import { Form, FormModes, DefaultEvents } from '@island.is/application/types'
-import { m } from '../lib/messages'
+import { m } from '../lib/messagess'
 
 export const PendingRejectedTryAgain: Form = buildForm({
   id: 'PendingForm',

@@ -4,7 +4,7 @@ import {
   buildSection,
 } from '@island.is/application/core'
 import { Form, FormModes } from '@island.is/application/types'
-import { m } from '../lib/messages'
+import { m } from '../lib/messagess'
 import Logo from '../assets/Logo'
 
 export const Approved: Form = buildForm({
