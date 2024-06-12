@@ -1,62 +1,62 @@
 import React, { FC, useEffect, useState, useRef } from 'react'
 import { FieldBaseProps } from '@island.is/application/types'
-import { Box, AlertMessage } from '@island.is/island-ui/core'
+import {
+  Box,
+  AlertMessage,
+  Text,
+  ErrorMessage,
+} from '@island.is/island-ui/core'
 import { PropertyTypeSelectField } from './PropertyTypeSelectField'
 import { useLocale } from '@island.is/localization'
-import { m } from '../../lib/messagess'
 import { PropertyTypes } from '../../lib/constants'
 import { PropertyTypeSearchField } from './PropertyTypeSearchField'
 import { PropertyDetail } from '@island.is/api/schema'
-import { useFieldArray, useForm } from 'react-hook-form'
+import { useFieldArray, useFormContext } from 'react-hook-form'
 import { MortgageCertificate } from '../../lib/dataSchema'
 import { CheckedProperties } from './CheckedProperties'
+import { getErrorViaPath, getValueViaPath } from '@island.is/application/core'
+import { error } from '../../lib/messages'
 
 export const SelectProperty: FC<React.PropsWithChildren<FieldBaseProps>> = (
   props,
 ) => {
-  const { application } = props
-  const { control } = useForm<MortgageCertificate>()
-  const { externalData } = application
-  const [showErrorMsg, setShowErrorMsg] = useState<boolean>(false)
+  const { application, field, errors } = props
+  const { control } = useFormContext<MortgageCertificate>()
   const { formatMessage } = useLocale()
   const errorMessage = useRef<HTMLDivElement>(null)
-  const [propertyType, setPropertyType] = useState<PropertyTypes | undefined>()
+  const [propertyType, setPropertyType] = useState<PropertyTypes | undefined>(
+    getValueViaPath(
+      application.answers,
+      `${field.id}.propertyType`,
+    ) as PropertyTypes,
+  )
   const { fields, append, remove } = useFieldArray({
     name: 'selectedProperties.properties',
     control,
   })
-
-  const { validation } =
-    (externalData.validateMortgageCertificate?.data as {
-      validation: {
-        propertyNumber: string
-        exists: boolean
-      }
-    }) || {}
 
   const handleAddProperty = (property: PropertyDetail, index: number) =>
     index >= 0
       ? handleRemoveProperty(index)
       : append({
           propertyNumber: property.propertyNumber ?? '',
-          propertyName: property.defaultAddress?.display || '',
+          propertyName: `${propertyType === '0' ? 'F' : ''}${
+            property.propertyNumber
+          } - ${property.defaultAddress?.display}`,
+          propertyType: propertyType?.toString() ?? '',
         })
 
   const handleRemoveProperty = (index: number) => remove(index)
 
-  // Display error message if certificate does not exists,
-  // that is, an error occured calling Syslumenn api
-  if (validation?.propertyNumber && !validation.exists && !showErrorMsg) {
-    setShowErrorMsg(true)
-  }
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     if (errorMessage && errorMessage.current) {
+  //       errorMessage.current.scrollIntoView({ behavior: 'smooth' })
+  //     }
+  //   }, 100)
+  // }, [showErrorMsg, errorMessage])
 
-  useEffect(() => {
-    setTimeout(() => {
-      if (errorMessage && errorMessage.current) {
-        errorMessage.current.scrollIntoView({ behavior: 'smooth' })
-      }
-    }, 100)
-  }, [showErrorMsg, errorMessage])
+  console.log(errors)
 
   return (
     <>
@@ -71,16 +71,15 @@ export const SelectProperty: FC<React.PropsWithChildren<FieldBaseProps>> = (
         checkedProperties={fields}
         setCheckedProperties={handleAddProperty}
       />
-
-      {showErrorMsg ? (
-        <Box ref={errorMessage} paddingTop={5} paddingBottom={5}>
-          <AlertMessage
-            type="error"
-            title={formatMessage(m.errorSheriffApiTitle)}
-            message={formatMessage(m.errorSheriffApiMessage)}
-          />
-        </Box>
-      ) : null}
+      {errors &&
+        getErrorViaPath(errors, `${field.id}.properties`) &&
+        fields.length === 0 && (
+          <Box paddingTop={2} paddingBottom={2}>
+            <ErrorMessage>
+              {formatMessage(error.errorNoSelectedProperty)}
+            </ErrorMessage>
+          </Box>
+        )}
       {!!fields.length && (
         <CheckedProperties
           {...props}

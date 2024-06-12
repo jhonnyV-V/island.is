@@ -2,11 +2,8 @@ import {
   AlertMessage,
   Button,
   TopicCard,
-  Link,
-  LinkContext,
   Text,
   Divider,
-  PdfViewer,
 } from '@island.is/island-ui/core'
 
 import React, { FC, useState } from 'react'
@@ -14,9 +11,8 @@ import { useLocale } from '@island.is/localization'
 import { formatText } from '@island.is/application/core'
 import { FieldBaseProps } from '@island.is/application/types'
 import { Box } from '@island.is/island-ui/core'
-import { m } from '../../lib/messagess'
 import * as styles from './ConfirmationField.css'
-import { Bus } from '../../assets'
+import { confirmation } from '../../lib/messages'
 
 type ConfirmationFieldProps = {
   field: {
@@ -62,7 +58,11 @@ export const ConfirmationField: FC<
               window.open(`${window.location.origin}/minarsidur`, '_blank')
             }}
           >
-            {formatText(m.openMySites, application, formatMessage)}
+            {formatText(
+              confirmation.labels.openMySites,
+              application,
+              formatMessage,
+            )}
           </Button>
         </Box>
       </>
@@ -86,13 +86,15 @@ export const ConfirmationField: FC<
             title="Go back"
           />
           <a
-            href={`data:application/pdf;base64,${externalData.getMortgageCertificate.data.contentBase64}`}
+            href={`data:application/pdf;base64,${
+              externalData.getMortgageCertificate.data.contentBase64 ?? ''
+            }`}
             download="vedbokavottord.pdf"
             className={styles.linkWithoutDecorations}
           >
             <Button icon="download" iconType="outline" variant="text">
               {formatText(
-                m.downloadMortgageCertificate,
+                confirmation.labels.downloadMortgageCertificate,
                 application,
                 formatMessage,
               )}
@@ -100,9 +102,11 @@ export const ConfirmationField: FC<
           </a>
         </Box>
 
-        <PdfViewer
-          file={`data:application/pdf;base64,${externalData.getMortgageCertificate.data.contentBase64}`}
-        />
+        {/* <PdfViewer
+          file={`data:application/pdf;base64,${
+            externalData.getMortgageCertificate.data.contentBase64 ?? ''
+          }`}
+        /> */}
         {renderFooter()}
       </>
     )
@@ -110,105 +114,88 @@ export const ConfirmationField: FC<
 
   return (
     <>
-      <Text variant="h2" marginBottom={4}>
-        {formatText(m.confirmation, application, formatMessage)}
-      </Text>
-      <Box marginBottom={3} paddingTop={0}>
+      {/* <Text variant="h2" marginBottom={4}>
+        {formatText(
+          confirmation.labels.confirmation,
+          application,
+          formatMessage,
+        )}
+      </Text> */}
+      {/* <Box marginBottom={3} paddingTop={0}>
         <AlertMessage
           type="success"
-          title={formatText(m.successTitle, application, formatMessage)}
+          title={formatText(
+            confirmation.labels.successTitle,
+            application,
+            formatMessage,
+          )}
           message={
             <Box component="span" display="block">
               <Text variant="small">
-                {formatText(m.successDescription, application, formatMessage)}
+                {formatText(
+                  confirmation.labels.successDescription,
+                  application,
+                  formatMessage,
+                )}
               </Text>
             </Box>
           }
         />
-      </Box>
-      <Box
-        marginBottom={3}
-        marginTop={0}
-        background="blue100"
-        padding={4}
-        display="flex"
-      >
-        <LinkContext.Provider
-          value={{
-            linkRenderer: (href, children) => (
-              <a
-                style={{
-                  color: '#0061ff',
-                  textDecoration: 'none',
-                  boxShadow: 'inset 0 -1px 0 0 currentColor',
-                  paddingBottom: 4,
-                }}
-                href={href}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                {children}
-              </a>
-            ),
-          }}
-        >
-          <Text variant="small">
-            {formatText(m.verificationDescription, application, formatMessage)}{' '}
-            <Link
-              href={formatText(
-                m.verificationLinkUrl,
-                application,
-                formatMessage,
-              )}
-              color="blue400"
-              underline="normal"
-              underlineVisibility="always"
-            >
-              {formatText(m.verificationLinkTitle, application, formatMessage)}
-            </Link>
-          </Text>
-        </LinkContext.Provider>
-      </Box>
+      </Box> */}
 
       <Box marginBottom={3}>
         <TopicCard
-          href="/"
+          // href="/"
           onClick={() => setViewMortgageCertificate(true)}
           tag="Pdf"
           colorScheme="blue"
         >
-          {formatText(m.mortgageCertificate, application, formatMessage)}
+          {formatText(
+            confirmation.labels.mortgageCertificate,
+            application,
+            formatMessage,
+          )}
         </TopicCard>
       </Box>
 
-      <Button
-        icon="open"
-        iconType="outline"
-        onClick={() => {
-          window.open(
-            formatText(
-              m.mortgageCertificateInboxLink,
+      <Box display="flex" wrap="nowrap" paddingBottom={4}>
+        <Text variant="h5">
+          {formatMessage(confirmation.labels.mortgageCertificateInboxText)}
+        </Text>
+
+        <Box paddingLeft={1}>
+          <Button
+            icon="open"
+            iconType="outline"
+            onClick={() => {
+              window.open(
+                formatText(
+                  confirmation.labels.mortgageCertificateInboxLink,
+                  application,
+                  formatMessage,
+                ),
+                '_blank',
+              )
+            }}
+            variant="text"
+          >
+            {formatText(
+              confirmation.labels.mortgageCertificateInboxLinkText,
               application,
               formatMessage,
-            ),
-            '_blank',
-          )
-        }}
-        variant="text"
-      >
-        {formatText(m.mortgageCertificateInboxText, application, formatMessage)}
-      </Button>
-
-      <Box
-        display="flex"
-        justifyContent="center"
-        marginTop={2}
-        marginBottom={4}
-      >
-        <Bus />
+            )}
+          </Button>
+        </Box>
       </Box>
 
-      {renderFooter()}
+      {/** Will only be visible if there are any incorrectPropertiesSent data */}
+      <Box paddingBottom={3}>
+        <AlertMessage
+          title="Beiðni um lagfæringu á veðbókarvottorði fyir F20257866 - Meistaravellir 31, 01 0204 Reykjavík hefur verið send sýslumanni."
+          message="Þú munt fá tilkynningu á netfangið [netfang] að yfirferð lokinni og getur þá reynt aftur og klárað umsóknina þína."
+          type="info"
+        />
+      </Box>
     </>
   )
 }

@@ -1,68 +1,39 @@
 import {
   buildForm,
-  buildDescriptionField,
   buildMultiField,
   buildSection,
-  buildExternalDataProvider,
-  buildDataProviderItem,
   buildCustomField,
-  buildSubmitField,
-  buildSelectField,
   buildSubSection,
 } from '@island.is/application/core'
-import { Form, FormModes, DefaultEvents } from '@island.is/application/types'
-import { m } from '../lib/messagess'
+import { Form, FormModes } from '@island.is/application/types'
 import {
-  IdentityApi,
-  NationalRegistryRealEstateApi,
-  UserProfileApi,
-  SyslumadurPaymentCatalogApi,
-} from '../dataProviders'
-import { overview, propertySearch } from '../lib/messages'
+  confirmation,
+  externalData,
+  overview,
+  payment,
+  property,
+  propertySearch,
+} from '../lib/messages'
+import { buildFormPaymentChargeOverviewSection } from '@island.is/application/ui-forms'
+import { getChargeItemCodesAndExtraLabel } from '../util'
+import Logo from '../assets/Logo'
 
 export const MortgageCertificateForm: Form = buildForm({
   id: 'MortgageCertificateFormDraft',
   title: '',
+  logo: Logo,
   mode: FormModes.DRAFT,
   renderLastScreenBackButton: true,
   renderLastScreenButton: true,
   children: [
     buildSection({
       id: 'externalData',
-      title: m.externalDataSection,
-      children: [
-        buildExternalDataProvider({
-          title: m.externalDataTitle,
-          id: 'approveExternalData',
-          subTitle: m.externalDataSubTitle,
-          checkboxLabel: m.externalDataAgreement,
-          dataProviders: [
-            buildDataProviderItem({
-              provider: IdentityApi,
-              title: m.nationalRegistryTitle,
-              subTitle: m.nationalRegistrySubTitle,
-            }),
-            // buildDataProviderItem({
-            //   provider: NationalRegistryRealEstateApi,
-            //   title: m.nationalRegistryRealEstateTitle,
-            //   subTitle: m.nationalRegistryRealEstateSubTitle,
-            // }),
-            buildDataProviderItem({
-              provider: UserProfileApi,
-              title: m.userProfileInformationTitle,
-              subTitle: m.userProfileInformationSubTitle,
-            }),
-            buildDataProviderItem({
-              provider: SyslumadurPaymentCatalogApi,
-              title: '',
-            }),
-          ],
-        }),
-      ],
+      title: externalData.general.sectionTitle,
+      children: [],
     }),
     buildSection({
       id: 'selectRealEstate',
-      title: m.property,
+      title: property.general.sectionTitle,
       children: [
         buildSubSection({
           title: propertySearch.general.sectionTitle,
@@ -78,19 +49,6 @@ export const MortgageCertificateForm: Form = buildForm({
                   title: '',
                   component: 'SelectProperty',
                 }),
-                // buildSubmitField({
-                //   id: 'submit',
-                //   placement: 'footer',
-                //   title: m.confirm,
-                //   refetchApplicationAfterSubmit: true,
-                //   actions: [
-                //     {
-                //       event: DefaultEvents.SUBMIT,
-                //       name: m.confirm,
-                //       type: 'primary',
-                //     },
-                //   ],
-                // }),
               ],
             }),
           ],
@@ -101,7 +59,6 @@ export const MortgageCertificateForm: Form = buildForm({
             buildMultiField({
               id: 'selectRealEstate.info',
               title: overview.general.pageTitle,
-              description: overview.general.description,
               space: 1,
               children: [
                 buildCustomField({
@@ -115,27 +72,15 @@ export const MortgageCertificateForm: Form = buildForm({
         }),
       ],
     }),
-    buildSection({
-      id: 'payment',
-      title: m.payment,
-      children: [
-        buildMultiField({
-          id: 'selectRealEstate.info',
-          title: propertySearch.general.pageTitle,
-          description: propertySearch.general.description,
-          space: 1,
-          children: [
-            buildDescriptionField({
-              id: 'temp',
-              title: 'Temp',
-            }),
-          ],
-        }),
-      ],
+    buildFormPaymentChargeOverviewSection({
+      sectionTitle: payment.general.sectionTitle,
+      forPaymentLabel: payment.labels.forPayment,
+      getSelectedChargeItems: (application) =>
+        getChargeItemCodesAndExtraLabel(application),
     }),
     buildSection({
       id: 'confirmation',
-      title: m.confirmation,
+      title: confirmation.general.sectionTitle,
       children: [],
     }),
   ],

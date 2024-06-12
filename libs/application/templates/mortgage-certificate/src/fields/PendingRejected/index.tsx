@@ -12,7 +12,7 @@ import { MCEvents } from '../../lib/constants'
 import { useMutation } from '@apollo/client'
 import { PropertyDetail } from '@island.is/api/schema'
 import { useLocale } from '@island.is/localization'
-import { m } from '../../lib/messagess'
+import { property } from '../../lib/messages'
 
 export const PendingRejected: FC<React.PropsWithChildren<FieldBaseProps>> = ({
   application,
@@ -62,7 +62,7 @@ export const PendingRejected: FC<React.PropsWithChildren<FieldBaseProps>> = ({
   return (
     <Box>
       <Text variant="h2" marginBottom={4}>
-        {formatMessage(m.selectRealEstateTitle)}
+        {formatMessage(property.general.pageTitle)}
       </Text>
 
       <Box
@@ -72,7 +72,9 @@ export const PendingRejected: FC<React.PropsWithChildren<FieldBaseProps>> = ({
         paddingY={1}
         marginBottom={5}
       >
-        <Text fontWeight="semiBold">{formatMessage(m.selectedProperty)}</Text>
+        <Text fontWeight="semiBold">
+          {formatMessage(property.labels.selectedProperty)}
+        </Text>
         <Text>
           {propertyDetails?.propertyNumber}
           {' - '}
@@ -82,15 +84,21 @@ export const PendingRejected: FC<React.PropsWithChildren<FieldBaseProps>> = ({
       <Box marginBottom={5}>
         <AlertMessage
           type="warning"
-          title={formatMessage(m.propertyErrorCertificateTitle)}
-          message={formatMessage(m.propertyErrorCertificateMessage)}
+          title={formatMessage(property.labels.propertyErrorCertificateTitle)}
+          message={formatMessage(
+            property.labels.propertyErrorCertificateMessage,
+          )}
         />
       </Box>
       <Box marginBottom={5}>
         <AlertMessage
           type="success"
-          title={formatMessage(m.propertyErrorCertificateSheriffTitle)}
-          message={formatMessage(m.propertyErrorCertificateSheriffMessage)}
+          title={formatMessage(
+            property.labels.propertyErrorCertificateSheriffTitle,
+          )}
+          message={formatMessage(
+            property.labels.propertyErrorCertificateSheriffMessage,
+          )}
         />
       </Box>
       <Box display="flex" justifyContent={'flexEnd'}>
@@ -98,10 +106,13 @@ export const PendingRejected: FC<React.PropsWithChildren<FieldBaseProps>> = ({
           variant="primary"
           icon="arrowForward"
           onClick={() => {
-            window.open(formatMessage(m.mortgageCertificateInboxLink), '_blank')
+            window.open(
+              formatMessage(property.labels.mortgageCertificateInboxLink),
+              '_blank',
+            )
           }}
         >
-          {formatMessage(m.mysites)}
+          {formatMessage(property.labels.mysites)}
         </Button>
       </Box>
     </Box>

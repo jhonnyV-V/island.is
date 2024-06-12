@@ -6,15 +6,14 @@ import {
   AlertMessage,
   SkeletonLoader,
   Button,
-  Link,
 } from '@island.is/island-ui/core'
 import { SUBMIT_APPLICATION } from '@island.is/application/graphql'
 import { useMutation, useQuery } from '@apollo/client'
 import { PropertyDetail } from '@island.is/api/schema'
 import { gql } from '@apollo/client'
 import { VALIDATE_MORTGAGE_CERTIFICATE_QUERY } from '../../graphql/queries'
-import { m } from '../../lib/messagess'
 import { useLocale } from '@island.is/localization'
+import { property } from '../../lib/messages'
 export const validateCertificateQuery = gql`
   ${VALIDATE_MORTGAGE_CERTIFICATE_QUERY}
 `
@@ -114,7 +113,9 @@ export const PendingRejectedTryAgain: FC<
         paddingY={1}
         marginBottom={5}
       >
-        <Text fontWeight="semiBold">{formatMessage(m.selectedProperty)}</Text>
+        <Text fontWeight="semiBold">
+          {formatMessage(property.labels.selectedProperty)}
+        </Text>
         <Text>
           {propertyDetails?.propertyNumber}
           {' - '}
@@ -125,19 +126,21 @@ export const PendingRejectedTryAgain: FC<
         <Box paddingBottom={3}>
           <AlertMessage
             type="error"
-            title={formatMessage(m.propertyCertificateError)}
-            message={formatMessage(m.propertyCertificateErrorContactSheriff)}
+            title={formatMessage(property.labels.propertyCertificateError)}
+            message={formatMessage(
+              property.labels.propertyCertificateErrorContactSheriff,
+            )}
           />
           <Box marginY={5} display="flex">
             <Button
               onClick={() => {
                 window.open(
-                  formatMessage(m.mortgageCertificateInboxLink),
+                  formatMessage(property.labels.mortgageCertificateInboxLink),
                   '_blank',
                 )
               }}
             >
-              {formatMessage(m.mysites)}
+              {formatMessage(property.labels.mysites)}
             </Button>
           </Box>
         </Box>

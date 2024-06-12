@@ -5,13 +5,17 @@ import {
 } from '@island.is/application/types'
 import {
   Box,
+  Button,
   Link,
   LinkContext,
+  PdfViewer,
   Text,
   TopicCard,
 } from '@island.is/island-ui/core'
 import { useLocale } from '@island.is/localization'
-import { FC } from 'react'
+import { FC, useState } from 'react'
+import { conclusionMessages } from '@island.is/application/ui-forms'
+import * as styles from './PdfLinkButtonFormField.css'
 
 interface Props extends FieldBaseProps {
   field: PdfLinkButtonField
@@ -25,7 +29,53 @@ export const PdfLinkButtonFormField: FC<React.PropsWithChildren<Props>> = ({
 
   const files = field.getPdfFiles && field.getPdfFiles(application)
 
+  const [fileToView, setFileToView] = useState<
+    | {
+        base64: string
+        filename: string
+      }
+    | undefined
+  >(undefined)
+
   if (!files || files.length === 0) return undefined
+
+  if (fileToView) {
+    return (
+      <>
+        <Box
+          display="flex"
+          marginBottom={5}
+          justifyContent="spaceBetween"
+          alignItems="center"
+        >
+          <Button
+            circle
+            icon="arrowBack"
+            onClick={() => {
+              setFileToView(undefined)
+            }}
+            colorScheme="light"
+            title="Go back"
+          />
+          <a
+            href={`data:application/pdf;base64,${fileToView.base64}`}
+            download={fileToView.filename}
+            className={styles.linkWithoutDecorations}
+          >
+            <Button icon="download" iconType="outline" variant="text">
+              {formatText(
+                conclusionMessages.pdfLinkButtonField.downloadButtonTitle,
+                application,
+                formatMessage,
+              )}
+            </Button>
+          </a>
+        </Box>
+
+        <PdfViewer file={`data:application/pdf;base64,${fileToView.base64}`} />
+      </>
+    )
+  }
 
   return (
     <>
@@ -35,6 +85,12 @@ export const PdfLinkButtonFormField: FC<React.PropsWithChildren<Props>> = ({
             onClick={() => {
               field.setViewPdfFile &&
                 field.setViewPdfFile({
+                  base64: file.base64,
+                  filename: file.filename,
+                })
+              !field.setViewPdfFile &&
+                field.viewPdfFile &&
+                setFileToView({
                   base64: file.base64,
                   filename: file.filename,
                 })

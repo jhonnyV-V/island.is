@@ -25,6 +25,7 @@ import {
   RegistryPerson,
   InheritanceTax,
   InheritanceReportInfo,
+  MortgageCertificateValidationOld,
 } from './syslumennClient.types'
 import {
   mapSyslumennAuction,
@@ -380,6 +381,58 @@ export class SyslumennService {
     return mapVehicle(response)
   }
 
+  async getMortgageCertificateOld(
+    propertyNumber: string,
+  ): Promise<MortgageCertificate> {
+    const { id, api } = await this.createApi()
+
+    const res = await api.vedbokarvottordPost({
+      skilabod: {
+        audkenni: id,
+        fastanumer: cleanPropertyNumber(propertyNumber),
+        tegundAndlags: VedbondTegundAndlags.NUMBER_0, // 0 = Real estate
+      },
+    })
+    const contentBase64 = res.vedbandayfirlitPDFSkra || ''
+
+    const certificate: MortgageCertificate = {
+      contentBase64: contentBase64,
+      apiMessage: res.skilabod,
+    }
+
+    return certificate
+  }
+
+  async validateMortgageCertificateOld(
+    propertyNumber: string,
+    isFromSearch: boolean | undefined,
+  ): Promise<MortgageCertificateValidationOld> {
+    try {
+      // Note: this function will throw an error if something goes wrong
+      const certificate = await this.getMortgageCertificate(propertyNumber)
+
+      const exists = certificate.contentBase64.length !== 0
+      const hasKMarking =
+        exists && certificate.contentBase64 !== 'Precondition Required'
+
+      // Note: we are saving propertyNumber and isFromSearch also in externalData,
+      // since it is not saved in answers if we go from state DRAFT -> DRAFT
+      return {
+        propertyNumber: propertyNumber,
+        isFromSearch: isFromSearch,
+        exists: exists,
+        hasKMarking: hasKMarking,
+      }
+    } catch (exception) {
+      return {
+        propertyNumber: propertyNumber,
+        isFromSearch: isFromSearch,
+        exists: false,
+        hasKMarking: false,
+      }
+    }
+  }
+
   async getMortgageCertificate(
     propertyNumber: string,
   ): Promise<MortgageCertificate> {
@@ -404,7 +457,6 @@ export class SyslumennService {
 
   async validateMortgageCertificate(
     propertyNumber: string,
-    isFromSearch: boolean | undefined,
   ): Promise<MortgageCertificateValidation> {
     try {
       // Note: this function will throw an error if something goes wrong
@@ -418,14 +470,12 @@ export class SyslumennService {
       // since it is not saved in answers if we go from state DRAFT -> DRAFT
       return {
         propertyNumber: propertyNumber,
-        isFromSearch: isFromSearch,
         exists: exists,
         hasKMarking: hasKMarking,
       }
     } catch (exception) {
       return {
         propertyNumber: propertyNumber,
-        isFromSearch: isFromSearch,
         exists: false,
         hasKMarking: false,
       }
@@ -483,6 +533,7 @@ export class SyslumennService {
             : VedbondTegundAndlags.NUMBER_0, // 0 = Real estate
       },
     })
+
     if (res.length > 0) {
       return res.map(mapAllPropertiesDetailResponse)
     } else {
