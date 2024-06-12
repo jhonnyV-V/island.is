@@ -64,6 +64,7 @@ import {
   DebtTypes,
   PropertyDetail,
   DebtTypes,
+  PropertyDetail,
 } from './syslumennClient.types'
 const UPLOAD_DATA_SUCCESS = 'Gögn móttekin'
 
