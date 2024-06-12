@@ -114,35 +114,6 @@ export const ConfirmationField: FC<
 
   return (
     <>
-      {/* <Text variant="h2" marginBottom={4}>
-        {formatText(
-          confirmation.labels.confirmation,
-          application,
-          formatMessage,
-        )}
-      </Text> */}
-      {/* <Box marginBottom={3} paddingTop={0}>
-        <AlertMessage
-          type="success"
-          title={formatText(
-            confirmation.labels.successTitle,
-            application,
-            formatMessage,
-          )}
-          message={
-            <Box component="span" display="block">
-              <Text variant="small">
-                {formatText(
-                  confirmation.labels.successDescription,
-                  application,
-                  formatMessage,
-                )}
-              </Text>
-            </Box>
-          }
-        />
-      </Box> */}
-
       <Box marginBottom={3}>
         <TopicCard
           // href="/"
