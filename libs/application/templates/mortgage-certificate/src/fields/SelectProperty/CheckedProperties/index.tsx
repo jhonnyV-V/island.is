@@ -28,6 +28,7 @@ export const CheckedProperties: FC<
       </Text>
       {properties.map((property, index) => {
         console.log(`${field.id}.properties[${index}].propertyNumber`)
+        console.log(property.propertyNumber)
         return (
           <Box
             display="flex"
@@ -39,14 +40,12 @@ export const CheckedProperties: FC<
             <Controller
               name={`${field.id}.properties[${index}].propertyNumber`}
               control={control}
-              defaultValue={property.propertyNumber}
               render={() => <input type="hidden" />}
             />
             <Box width="full" paddingRight={1}>
               <InputController
                 id={`${field.id}.properties[${index}].propertyName`}
                 label="Valin eign"
-                defaultValue={`${property.propertyNumber} - ${property.propertyName}`}
                 readOnly
               />
             </Box>

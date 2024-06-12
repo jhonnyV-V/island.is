@@ -12,6 +12,7 @@ import { PropertyTypes } from '../../../lib/constants'
 import { PropertyTable } from './PropertyTable'
 import { FieldArrayWithId } from 'react-hook-form'
 import { MortgageCertificate } from '../../../lib/dataSchema'
+import { getValueViaPath } from '@island.is/application/core'
 
 interface SearchPropertiesProps {
   propertyType: PropertyTypes | undefined
@@ -38,16 +39,16 @@ export const PropertyTypeSearchField: FC<
 }) => {
   const { formatMessage } = useLocale()
   const [showSearchError, setShowSearchError] = useState<boolean>(false)
-  const [searchStr, setSearchStr] = useState('')
+  const [searchStr, setSearchStr] = useState(
+    getValueViaPath(application.answers, `${field.id}.searchStr`, '') as string,
+  )
   const [foundProperties, setFoundProperties] = useState<
     PropertyDetail[] | undefined
   >()
-  console.log(foundProperties)
 
   const [runQuery, { loading }] = useLazyQuery(searchPropertiesQuery, {
     onCompleted(result) {
       setShowSearchError(false)
-      console.log(result)
       setFoundProperties(result.searchForAllProperties)
     },
     onError() {
@@ -75,8 +76,8 @@ export const PropertyTypeSearchField: FC<
         backgroundColor="blue"
         label={formatMessage(propertySearch.labels.searchLabel)}
         placeholder={formatMessage(propertySearch.labels.searchPlaceholder)}
-        id="propertyNumber"
-        name="propertyNumber"
+        id={`${field.id}.searchStr`}
+        name={`${field.id}.searchStr`}
         onChange={debounce((e) => setSearchStr(e.target.value), 300)}
         icon="search"
         inputMode="search"

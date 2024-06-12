@@ -15,16 +15,10 @@ import {
   coreHistoryMessages,
   pruneAfterDays,
 } from '@island.is/application/core'
-import { Events, States, Roles, MCEvents } from './constants'
+import { Events, States, Roles } from './constants'
 import { ApiActions } from '../shared'
-import { m } from './messagess'
-import {
-  existsAndKMarking,
-  exists,
-} from '../util/mortgageCertificateValidation'
 import {
   IdentityApi,
-  NationalRegistryRealEstateApi,
   UserProfileApi,
   SyslumadurPaymentCatalogApi,
 } from '../dataProviders'
@@ -32,6 +26,7 @@ import { AuthDelegationType } from '@island.is/shared/types'
 import { buildPaymentState } from '@island.is/application/utils'
 import { getChargeItemCodes } from '../util'
 import { MortgageCertificateSchema } from './dataSchema'
+import { application } from './messages'
 
 const template: ApplicationTemplate<
   ApplicationContext,
@@ -39,8 +34,8 @@ const template: ApplicationTemplate<
   Events
 > = {
   type: ApplicationTypes.MORTGAGE_CERTIFICATE,
-  name: m.name,
-  institution: m.institutionName,
+  name: application.general.name,
+  institution: application.general.institutionName,
   translationNamespaces: [
     ApplicationConfigurations.MortgageCertificate.translation,
   ],
@@ -53,13 +48,13 @@ const template: ApplicationTemplate<
   stateMachineConfig: {
     initial: States.DRAFT,
     states: {
-      [States.DRAFT]: {
+      [States.PREREQUISITES]: {
         meta: {
-          name: 'Umsókn um veðbókarvottorð',
+          name: 'Gagnaöflun',
           status: 'draft',
           actionCard: {
             tag: {
-              label: m.actionCardDraft,
+              label: application.labels.actionCardPrerequisites,
               variant: 'blue',
             },
             historyLogs: [
@@ -70,9 +65,51 @@ const template: ApplicationTemplate<
             ],
           },
           lifecycle: EphemeralStateLifeCycle,
-          onExit: defineTemplateApi({
-            action: ApiActions.validateMortgageCertificate,
-          }),
+          roles: [
+            {
+              id: Roles.APPLICANT,
+              formLoader: () =>
+                import('../forms/Prerequisites').then((module) =>
+                  Promise.resolve(module.PrerequisitesForm),
+                ),
+              actions: [
+                {
+                  event: DefaultEvents.SUBMIT,
+                  name: 'Staðfesta',
+                  type: 'primary',
+                },
+              ],
+              write: 'all',
+              read: 'all',
+              delete: true,
+              api: [IdentityApi, UserProfileApi, SyslumadurPaymentCatalogApi],
+            },
+          ],
+        },
+        on: {
+          [DefaultEvents.SUBMIT]: { target: States.DRAFT },
+        },
+      },
+      [States.DRAFT]: {
+        meta: {
+          name: 'Umsókn um veðbókarvottorð',
+          status: 'draft',
+          actionCard: {
+            tag: {
+              label: application.labels.actionCardDraft,
+              variant: 'blue',
+            },
+            historyLogs: [
+              {
+                logMessage: coreHistoryMessages.applicationStarted,
+                onEvent: DefaultEvents.SUBMIT,
+              },
+            ],
+          },
+          lifecycle: EphemeralStateLifeCycle,
+          // onExit: defineTemplateApi({
+          //   action: ApiActions.validateMortgageCertificate,
+          // }),
           roles: [
             {
               id: Roles.APPLICANT,
@@ -88,160 +125,14 @@ const template: ApplicationTemplate<
                 },
               ],
               write: 'all',
-              api: [
-                IdentityApi,
-                // NationalRegistryRealEstateApi,
-                UserProfileApi,
-                SyslumadurPaymentCatalogApi,
-              ],
               delete: true,
             },
           ],
         },
         on: {
-          [DefaultEvents.SUBMIT]: [
-            {
-              target: States.PAYMENT_INFO,
-              cond: existsAndKMarking,
-            },
-            {
-              target: States.PENDING_REJECTED,
-              cond: exists,
-            },
-            {
-              target: States.DRAFT,
-            },
-          ],
-        },
-      },
-      [States.PENDING_REJECTED]: {
-        meta: {
-          status: 'inprogress',
-          name: 'Beiðni um vinnslu',
-          actionCard: {
-            tag: {
-              label: m.actionCardDraft,
-              variant: 'blue',
-            },
-            pendingAction: {
-              title: m.pendingActionTryingToSubmitRequestToSyslumennTitle,
-              content:
-                m.pendingActionTryingToSubmitRequestToSyslumennDescription,
-              displayStatus: 'info',
-            },
-            historyLogs: [
-              {
-                logMessage: m.historyLogSubmittedRequestToSyslumenn,
-                onEvent: MCEvents.PENDING_REJECTED_TRY_AGAIN,
-              },
-            ],
+          [DefaultEvents.SUBMIT]: {
+            target: States.PAYMENT,
           },
-          lifecycle: pruneAfterDays(3 * 30),
-          onEntry: defineTemplateApi({
-            action: ApiActions.submitRequestToSyslumenn,
-          }),
-          roles: [
-            {
-              id: Roles.APPLICANT,
-              formLoader: () =>
-                import('../forms/PendingRejected').then(
-                  (val) => val.PendingRejected,
-                ),
-              actions: [],
-              write: 'all',
-              delete: true,
-            },
-          ],
-        },
-        on: {
-          [MCEvents.PENDING_REJECTED_TRY_AGAIN]: {
-            target: States.PENDING_REJECTED_TRY_AGAIN,
-          },
-          [DefaultEvents.SUBMIT]: { target: States.PENDING_REJECTED_TRY_AGAIN },
-        },
-      },
-      [States.PENDING_REJECTED_TRY_AGAIN]: {
-        meta: {
-          name: 'Beiðni um vinnslu',
-          status: 'inprogress',
-          actionCard: {
-            tag: {
-              label: m.actionCardDraft,
-              variant: 'blue',
-            },
-            pendingAction: {
-              title: m.pendingActionCheckIfSyslumennHasFixedKMarkingTitle,
-              content:
-                m.pendingActionCheckIfSyslumennHasFixedKMarkingDescription,
-              displayStatus: 'warning',
-            },
-            historyLogs: [
-              {
-                logMessage: m.historyLogSyslumennHasFixedKMarking,
-                onEvent: DefaultEvents.SUBMIT,
-              },
-            ],
-          },
-          lifecycle: pruneAfterDays(3 * 30),
-          onExit: defineTemplateApi({
-            action: ApiActions.validateMortgageCertificate,
-          }),
-          roles: [
-            {
-              id: Roles.APPLICANT,
-              formLoader: () =>
-                import('../forms/PendingRejectedTryAgain').then(
-                  (val) => val.PendingRejectedTryAgain,
-                ),
-              actions: [
-                {
-                  event: DefaultEvents.SUBMIT,
-                  name: 'Staðfesta',
-                  type: 'primary',
-                },
-              ],
-              write: 'all',
-              delete: true,
-            },
-          ],
-        },
-        on: {
-          [DefaultEvents.SUBMIT]: [
-            {
-              target: States.PAYMENT_INFO,
-              cond: existsAndKMarking,
-            },
-            {
-              target: States.PENDING_REJECTED_TRY_AGAIN,
-            },
-          ],
-        },
-      },
-      [States.PAYMENT_INFO]: {
-        meta: {
-          name: 'Greiðsla',
-          status: 'inprogress',
-          actionCard: {
-            tag: {
-              label: m.actionCardPayment,
-              variant: 'red',
-            },
-          },
-          lifecycle: EphemeralStateLifeCycle,
-          roles: [
-            {
-              id: Roles.APPLICANT,
-              formLoader: () =>
-                import('../forms/PaymentInfo').then((val) => val.PaymentInfo),
-              actions: [
-                { event: DefaultEvents.SUBMIT, name: 'Áfram', type: 'primary' },
-              ],
-              write: 'all',
-            },
-          ],
-        },
-        on: {
-          [DefaultEvents.SUBMIT]: { target: States.PAYMENT },
         },
       },
       [States.PAYMENT]: buildPaymentState({
@@ -262,17 +153,17 @@ const template: ApplicationTemplate<
           lifecycle: pruneAfterDays(3 * 30),
           actionCard: {
             tag: {
-              label: m.actionCardDone,
+              label: application.labels.actionCardDone,
               variant: 'blueberry',
             },
             pendingAction: {
-              title: m.pendingActionApplicationCompletedTitle,
+              title: application.labels.pendingActionApplicationCompletedTitle,
               displayStatus: 'success',
             },
           },
-          onEntry: defineTemplateApi({
-            action: ApiActions.getMortgageCertificate,
-          }),
+          // onEntry: defineTemplateApi({
+          //   action: ApiActions.getMortgageCertificate,
+          // }),
           roles: [
             {
               id: Roles.APPLICANT,

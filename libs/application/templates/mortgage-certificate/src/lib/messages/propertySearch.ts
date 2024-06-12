@@ -47,6 +47,21 @@ export const propertySearch = {
       defaultMessage: 'Eign með þessu númeri fannst ekki.',
       description: 'Property not found alert message',
     },
+    propertyNumber: {
+      id: 'mc.application:propertySearch.labels.propertyNumber',
+      defaultMessage: 'Fasteignarnúmer',
+      description: 'Property number',
+    },
+    propertyDescription: {
+      id: 'mc.application:propertySearch.labels.propertyDescription',
+      defaultMessage: 'Lýsing',
+      description: 'Description',
+    },
+    propertyAddress: {
+      id: 'mc.application:propertySearch.labels.propertyAddress',
+      defaultMessage: 'Heimilisfang',
+      description: 'Address',
+    },
   }),
   propertyTypes: defineMessages({
     [PropertyTypes.REAL_ESTATE]: {

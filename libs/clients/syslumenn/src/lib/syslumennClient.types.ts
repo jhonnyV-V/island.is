@@ -189,6 +189,13 @@ export interface MortgageCertificate {
   apiMessage?: string | undefined
 }
 
+export interface MortgageCertificateValidationOld {
+  propertyNumber: string
+  isFromSearch?: boolean
+  exists: boolean
+  hasKMarking: boolean
+}
+
 export interface MortgageCertificateValidation {
   propertyNumber: string
   isFromSearch?: boolean

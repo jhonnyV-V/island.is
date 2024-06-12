@@ -3,9 +3,9 @@ import { Box, Text, Table as T, Checkbox } from '@island.is/island-ui/core'
 import { FieldBaseProps } from '@island.is/application/types'
 import { PropertyDetail } from '@island.is/api/schema'
 import { useLocale } from '@island.is/localization'
-import { m } from '../../../../lib/messagess'
 import { FieldArrayWithId } from 'react-hook-form'
 import { MortgageCertificate } from '../../../../lib/dataSchema'
+import { propertySearch } from '../../../../lib/messages'
 
 interface PropertyTableProps {
   selectHandler: (property: PropertyDetail, index: number) => void
@@ -21,10 +21,6 @@ export const PropertyTable: FC<
   React.PropsWithChildren<FieldBaseProps & PropertyTableProps & PropertyDetail>
 > = ({ selectHandler, propertyInfo, checkedProperties }) => {
   const { formatMessage } = useLocale()
-  console.log(checkedProperties)
-
-  console.log(propertyInfo)
-
   return (
     <>
       <Box paddingY={2}>
@@ -33,13 +29,21 @@ export const PropertyTable: FC<
             <T.Row>
               <T.HeadData></T.HeadData>
               <T.HeadData>
-                <TableHeadText text={formatMessage(m.propertyNumber)} />
+                <TableHeadText
+                  text={formatMessage(propertySearch.labels.propertyNumber)}
+                />
               </T.HeadData>
               <T.HeadData>
-                <TableHeadText text={formatMessage(m.propertyDescription)} />
+                <TableHeadText
+                  text={formatMessage(
+                    propertySearch.labels.propertyDescription,
+                  )}
+                />
               </T.HeadData>
               <T.HeadData>
-                <TableHeadText text={formatMessage(m.propertyAddress)} />
+                <TableHeadText
+                  text={formatMessage(propertySearch.labels.propertyAddress)}
+                />
               </T.HeadData>
             </T.Row>
           </T.Head>

@@ -1094,6 +1094,68 @@
         ]
       }
     },
+    "/api/KannaKonnunarvottord/{audkenni}": {
+      "get": {
+        "tags": ["Syslumenn"],
+        "operationId": "KannaKonnunarvottord_Get",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "audkenni",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "Hjonaefni1",
+            "in": "query",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "Hjonaefni2",
+            "in": "query",
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/KonnunarvottordSvar"
+            }
+          },
+          "500": {
+            "x-nullable": false,
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/KonnunarvottordSvar"
+            }
+          },
+          "400": {
+            "x-nullable": false,
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/KonnunarvottordSvar"
+            }
+          },
+          "401": {
+            "x-nullable": false,
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/KonnunarvottordSvar"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT Token": []
+          }
+        ]
+      }
+    },
     "/v1/Danarbu/BankaupplysingarDanarbus": {
       "post": {
         "tags": ["Syslumenn"],
@@ -3322,6 +3384,9 @@
         "nafn": {
           "type": "string"
         },
+        "kennitala": {
+          "type": "string"
+        },
         "idngrein": {
           "type": "string"
         },
@@ -3893,6 +3958,17 @@
         }
       }
     },
+    "KonnunarvottordSvar": {
+      "type": "object",
+      "properties": {
+        "stada": {
+          "type": "string"
+        },
+        "skyring": {
+          "type": "string"
+        }
+      }
+    },
     "BankaupplysingarDanarbusSkeyti": {
       "type": "object",
       "properties": {
@@ -4180,7 +4256,7 @@
     },
     "AlgengTengsl": {
       "type": "object",
-      "required": ["oid"],
+      "required": ["oid", "virk"],
       "properties": {
         "oid": {
           "type": "integer",
@@ -4188,6 +4264,9 @@
         },
         "heiti": {
           "type": "string"
+        },
+        "virk": {
+          "type": "boolean"
         }
       }
     },
