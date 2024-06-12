@@ -63,6 +63,7 @@ import {
   InheritanceReportInfo,
   DebtTypes,
   PropertyDetail,
+  DebtTypes,
 } from './syslumennClient.types'
 const UPLOAD_DATA_SUCCESS = 'Gögn móttekin'
 
