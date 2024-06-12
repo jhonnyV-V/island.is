@@ -25,3 +25,9 @@ export enum States {
 export enum Roles {
   APPLICANT = 'applicant',
 }
+
+export enum PropertyTypes {
+  REAL_ESTATE = '0',
+  VEHICLE = '1',
+  SHIP = '2',
+}

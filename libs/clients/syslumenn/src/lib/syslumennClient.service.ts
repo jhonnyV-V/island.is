@@ -49,6 +49,7 @@ import {
   mapDepartedToRegistryPerson,
   mapInheritanceTax,
   mapEstateToInheritanceReportInfo,
+  mapAllPropertiesDetailResponse,
 } from './syslumennClient.utils'
 import { Injectable, Inject } from '@nestjs/common'
 import {
@@ -441,6 +442,7 @@ export class SyslumennService {
         tegundAndlags: VedbondTegundAndlags.NUMBER_0, // 0 = Real estate
       },
     })
+
     if (res.length > 0) {
       return {
         propertyNumber: propertyNumber,
@@ -455,6 +457,34 @@ export class SyslumennService {
           ],
         },
       }
+    } else {
+      throw new Error()
+    }
+  }
+
+  async getAllPropertyDetails(
+    propertyNumber: string,
+    propertyType: string,
+  ): Promise<PropertyDetail[]> {
+    const { id, api } = await this.createApi()
+
+    const res = await api.vedbokavottordRegluverkiPost({
+      skilabod: {
+        audkenni: id,
+        fastanumer:
+          propertyType === '0'
+            ? cleanPropertyNumber(propertyNumber)
+            : propertyNumber,
+        tegundAndlags:
+          propertyType === '1'
+            ? VedbondTegundAndlags.NUMBER_1 // 1 = Vehicle
+            : propertyType === '2'
+            ? VedbondTegundAndlags.NUMBER_2 // 2 = Ship
+            : VedbondTegundAndlags.NUMBER_0, // 0 = Real estate
+      },
+    })
+    if (res.length > 0) {
+      return res.map(mapAllPropertiesDetailResponse)
     } else {
       throw new Error()
     }

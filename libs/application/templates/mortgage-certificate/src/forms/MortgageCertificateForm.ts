@@ -7,20 +7,24 @@ import {
   buildDataProviderItem,
   buildCustomField,
   buildSubmitField,
+  buildSelectField,
+  buildSubSection,
 } from '@island.is/application/core'
 import { Form, FormModes, DefaultEvents } from '@island.is/application/types'
-import { m } from '../lib/messages'
+import { m } from '../lib/messagess'
 import {
   IdentityApi,
   NationalRegistryRealEstateApi,
   UserProfileApi,
   SyslumadurPaymentCatalogApi,
 } from '../dataProviders'
+import { overview, propertySearch } from '../lib/messages'
 
 export const MortgageCertificateForm: Form = buildForm({
   id: 'MortgageCertificateFormDraft',
   title: '',
   mode: FormModes.DRAFT,
+  renderLastScreenBackButton: true,
   renderLastScreenButton: true,
   children: [
     buildSection({
@@ -60,32 +64,51 @@ export const MortgageCertificateForm: Form = buildForm({
       id: 'selectRealEstate',
       title: m.property,
       children: [
-        buildMultiField({
-          id: 'selectRealEstate.info',
-          title: m.selectRealEstateTitle,
-          space: 1,
+        buildSubSection({
+          title: propertySearch.general.sectionTitle,
           children: [
-            buildDescriptionField({
-              id: 'selectRealEstateDescription',
-              title: '',
-              description: m.selectRealEstateDescription,
+            buildMultiField({
+              id: 'selectRealEstate.info',
+              title: propertySearch.general.pageTitle,
+              description: propertySearch.general.description,
+              space: 1,
+              children: [
+                buildCustomField({
+                  id: 'selectedProperties',
+                  title: '',
+                  component: 'SelectProperty',
+                }),
+                // buildSubmitField({
+                //   id: 'submit',
+                //   placement: 'footer',
+                //   title: m.confirm,
+                //   refetchApplicationAfterSubmit: true,
+                //   actions: [
+                //     {
+                //       event: DefaultEvents.SUBMIT,
+                //       name: m.confirm,
+                //       type: 'primary',
+                //     },
+                //   ],
+                // }),
+              ],
             }),
-            buildCustomField({
-              id: 'selectProperty',
-              title: '',
-              component: 'SelectProperty',
-            }),
-            buildSubmitField({
-              id: 'submit',
-              placement: 'footer',
-              title: m.confirm,
-              refetchApplicationAfterSubmit: true,
-              actions: [
-                {
-                  event: DefaultEvents.SUBMIT,
-                  name: m.confirm,
-                  type: 'primary',
-                },
+          ],
+        }),
+        buildSubSection({
+          title: overview.general.sectionTitle,
+          children: [
+            buildMultiField({
+              id: 'selectRealEstate.info',
+              title: overview.general.pageTitle,
+              description: overview.general.description,
+              space: 1,
+              children: [
+                buildCustomField({
+                  id: 'propertiesOverview',
+                  title: '',
+                  component: 'PropertiesOverview',
+                }),
               ],
             }),
           ],
@@ -95,7 +118,20 @@ export const MortgageCertificateForm: Form = buildForm({
     buildSection({
       id: 'payment',
       title: m.payment,
-      children: [],
+      children: [
+        buildMultiField({
+          id: 'selectRealEstate.info',
+          title: propertySearch.general.pageTitle,
+          description: propertySearch.general.description,
+          space: 1,
+          children: [
+            buildDescriptionField({
+              id: 'temp',
+              title: 'Temp',
+            }),
+          ],
+        }),
+      ],
     }),
     buildSection({
       id: 'confirmation',

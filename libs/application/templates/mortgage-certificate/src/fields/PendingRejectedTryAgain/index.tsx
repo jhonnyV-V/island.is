@@ -13,7 +13,7 @@ import { useMutation, useQuery } from '@apollo/client'
 import { PropertyDetail } from '@island.is/api/schema'
 import { gql } from '@apollo/client'
 import { VALIDATE_MORTGAGE_CERTIFICATE_QUERY } from '../../graphql/queries'
-import { m } from '../../lib/messages'
+import { m } from '../../lib/messagess'
 import { useLocale } from '@island.is/localization'
 export const validateCertificateQuery = gql`
   ${VALIDATE_MORTGAGE_CERTIFICATE_QUERY}

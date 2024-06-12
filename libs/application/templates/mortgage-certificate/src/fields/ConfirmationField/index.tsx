@@ -14,7 +14,7 @@ import { useLocale } from '@island.is/localization'
 import { formatText } from '@island.is/application/core'
 import { FieldBaseProps } from '@island.is/application/types'
 import { Box } from '@island.is/island-ui/core'
-import { m } from '../../lib/messages'
+import { m } from '../../lib/messagess'
 import * as styles from './ConfirmationField.css'
 import { Bus } from '../../assets'
 
