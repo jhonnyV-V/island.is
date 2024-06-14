@@ -8,6 +8,7 @@ import {
   buildAlertMessageField,
   buildRepeater,
   buildPdfLinkButtonField,
+  getValueViaPath,
 } from '@island.is/application/core'
 import { Form, FormModes } from '@island.is/application/types'
 import Logo from '../assets/Logo'
@@ -57,6 +58,13 @@ export const Approved: Form = buildForm({
               verificationLinkTitle: '',
               verificationLinkUrl: '',
               getPdfFiles: (application) => {
+                const pdfFiles = getValueViaPath(
+                  application.externalData,
+                  'getMortgageCertificate.data',
+                  [],
+                ) as {
+                  contentBase64: string
+                }[]
                 return []
               },
               viewPdfFile: true,

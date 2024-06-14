@@ -497,7 +497,7 @@ export class SyslumennService {
       return {
         propertyNumber: propertyNumber,
         defaultAddress: {
-          display: res[0].heiti,
+          display: res[0].heiti || '',
         },
         unitsOfUse: {
           unitsOfUse: [
@@ -517,7 +517,7 @@ export class SyslumennService {
     propertyType: string,
   ): Promise<PropertyDetail[]> {
     const { id, api } = await this.createApi()
-
+    console.log('Property type: ', propertyType)
     const res = await api.vedbokavottordRegluverkiPost({
       skilabod: {
         audkenni: id,
@@ -534,8 +534,10 @@ export class SyslumennService {
       },
     })
 
+    console.log('RES::::', res)
+
     if (res.length > 0) {
-      return res.map(mapAllPropertiesDetailResponse)
+      return res.map(mapAllPropertiesDetailResponse) || []
     } else {
       throw new Error()
     }

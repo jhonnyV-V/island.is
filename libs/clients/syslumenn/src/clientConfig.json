@@ -8,14 +8,26 @@
   },
   "host": "api.syslumenn.is",
   "basePath": "/staging",
-  "schemes": ["https"],
-  "produces": ["text/plain", "application/json", "text/json"],
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "text/plain",
+    "application/json",
+    "text/json"
+  ],
   "paths": {
     "/v1/Innskraning": {
       "post": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "Innskraning_Post",
-        "consumes": ["application/json", "text/json", "application/*+json"],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
         "parameters": [
           {
             "name": "notandi",
@@ -45,7 +57,9 @@
     },
     "/v1/Postnumer": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "Postnumer_GetPostnumerAll",
         "responses": {
           "200": {
@@ -68,7 +82,9 @@
     },
     "/v1/Postnumer/{id}": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "Postnumer_GetPostnumer",
         "parameters": [
           {
@@ -112,9 +128,15 @@
     },
     "/api/SkraSveinsbref": {
       "post": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "SkraSveinsbref_CreateSveinsbref",
-        "consumes": ["application/json", "text/json", "application/*+json"],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
         "parameters": [
           {
             "name": "sveinsbrefList",
@@ -150,7 +172,9 @@
     },
     "/api/Sveinsbref/{audkenni}": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "Sveinsbref_Get",
         "parameters": [
           {
@@ -188,7 +212,9 @@
     },
     "/v1/AdfarabeidnirHeimildaflokkur": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "AdfarabeidnirHeimildaflokkur_GetAdfarabeidnirHeimildaflokkurAll",
         "responses": {
           "200": {
@@ -211,7 +237,9 @@
     },
     "/v1/AdfarabeidnirHeimildaflokkur/{id}": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "AdfarabeidnirHeimildaflokkur_GetAdfarabeidnirHeimildaflokkur",
         "parameters": [
           {
@@ -255,7 +283,9 @@
     },
     "/v1/Embaetti": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "Embaetti_GetEmbaettiAll",
         "responses": {
           "200": {
@@ -278,7 +308,9 @@
     },
     "/v1/Embaetti/{id}": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "Embaetti_GetEmbaetti",
         "parameters": [
           {
@@ -322,7 +354,9 @@
     },
     "/v1/EmbaettiOgStarfsstodvar": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "EmbaettiOgStarfsstodvar_GetEmbaetti",
         "responses": {
           "200": {
@@ -345,7 +379,9 @@
     },
     "/api/Okutaeki/{fastanumer}/{audkenni}": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "Okutaeki_Get",
         "parameters": [
           {
@@ -402,7 +438,9 @@
     },
     "/api/Uppbod/{audkenni}": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "Uppbod_Get",
         "parameters": [
           {
@@ -448,7 +486,9 @@
     },
     "/v1/IdngreinarMeistara": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "IdngreinarMeistara_Get",
         "responses": {
           "200": {
@@ -474,7 +514,9 @@
     },
     "/api/Logmannalisti": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "Logmannalisti_Get",
         "parameters": [
           {
@@ -505,7 +547,9 @@
     },
     "/api/Afengisleyfi/{audkenni}": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "Afengisleyfi_Get",
         "parameters": [
           {
@@ -551,7 +595,9 @@
     },
     "/api/Meistaraleyfi/{audkenni}": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "Meistaraleyfi_Get",
         "parameters": [
           {
@@ -597,7 +643,9 @@
     },
     "/api/Taekifaerisleyfi/{audkenni}": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "Taekifaerisleyfi_Get",
         "parameters": [
           {
@@ -643,7 +691,9 @@
     },
     "/api/VirkLeyfi/{audkenni}": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "VirkLeyfi_Get",
         "parameters": [
           {
@@ -709,7 +759,9 @@
     },
     "/api/VirkLeyfiCsv/{audkenni}": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "VirkLeyfiCsv_Get",
         "parameters": [
           {
@@ -752,7 +804,9 @@
     },
     "/api/VirkLeyfiMedFastanumerum/{audkenni}": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "VirkLeyfiMedFastanumerum_Get",
         "parameters": [
           {
@@ -818,7 +872,9 @@
     },
     "/v1/VirkarHeimagistingar/{audkenni}": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "VirkarHeimagistingar_Get",
         "parameters": [
           {
@@ -864,7 +920,9 @@
     },
     "/v1/VirkarHeimagistingar/{audkenni}/{ar}": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "VirkarHeimagistingar_Get2",
         "parameters": [
           {
@@ -917,9 +975,15 @@
     },
     "/v1/ArangurslausFraDags": {
       "post": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "ArangurslausFraDags_Post",
-        "consumes": ["application/json", "text/json", "application/*+json"],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
         "parameters": [
           {
             "name": "skilabod",
@@ -956,9 +1020,15 @@
     },
     "/v1/NyskraAdfaraBeidni": {
       "post": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "NyskraAdfaraBeidni_Post",
-        "consumes": ["application/json", "text/json", "application/*+json"],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
         "parameters": [
           {
             "name": "skilabod",
@@ -995,7 +1065,9 @@
     },
     "/v1/Fullnustusvid/Naudungarsala/UppbodFaFasteignir": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "UppbodFaFasteignir_Get",
         "responses": {
           "200": {
@@ -1018,9 +1090,15 @@
     },
     "/v1/AfturkallaAdfarabeidni": {
       "post": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "AfturkallaAdfarabeidni_Post",
-        "consumes": ["application/json", "text/json", "application/*+json"],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
         "parameters": [
           {
             "name": "skilabod",
@@ -1057,9 +1135,15 @@
     },
     "/v1/ArangurslausFraTilDags": {
       "post": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "ArangurslausFraTilDags_Post",
-        "consumes": ["application/json", "text/json", "application/*+json"],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
         "parameters": [
           {
             "name": "skilabod",
@@ -1096,7 +1180,9 @@
     },
     "/api/KannaKonnunarvottord/{audkenni}": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "KannaKonnunarvottord_Get",
         "parameters": [
           {
@@ -1158,9 +1244,15 @@
     },
     "/v1/Danarbu/BankaupplysingarDanarbus": {
       "post": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "BankaupplysingarDanarbus_Post",
-        "consumes": ["application/json", "text/json", "application/*+json"],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
         "parameters": [
           {
             "name": "skeyti",
@@ -1197,7 +1289,9 @@
     },
     "/api/DanarbuAlgengTengsl/{audkenni}": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "DanarbuAlgengTengsl_Get",
         "parameters": [
           {
@@ -1250,7 +1344,9 @@
     },
     "/api/DanarbuAlgengTengslUmsaekjanda/{audkenni}": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "DanarbuAlgengTengslUmsaekjanda_Get",
         "parameters": [
           {
@@ -1303,7 +1399,9 @@
     },
     "/{audkenni}": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "Erfdafjarskattur_Get",
         "parameters": [
           {
@@ -1360,9 +1458,15 @@
     },
     "/api/SkiptaUmSkraningaradilaDanarbus": {
       "post": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "SkiptaUmSkraningaradilaDanarbus_Post",
-        "consumes": ["application/json", "text/json", "application/*+json"],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
         "parameters": [
           {
             "name": "payload",
@@ -1413,7 +1517,9 @@
     },
     "/api/SkraningaradiliDanarbus/{kennitala}/{audkenni}": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "SkraningaradiliDanarbus_Get",
         "parameters": [
           {
@@ -1473,9 +1579,15 @@
     },
     "/api/UpplysingarRadstofunDanarbus": {
       "post": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "UpplysingarRadstofunDanarbus_Post",
-        "consumes": ["application/json", "text/json", "application/*+json"],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
         "parameters": [
           {
             "name": "fyrirspurn",
@@ -1526,9 +1638,15 @@
     },
     "/v1/Danarbu/UpplysingarUrDanarbui": {
       "post": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "UpplysingarUrDanarbui_Post",
-        "consumes": ["application/json", "text/json", "application/*+json"],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
         "parameters": [
           {
             "name": "fyrirspurn",
@@ -1579,9 +1697,15 @@
     },
     "/v1/Danarbu/UpplysingarUrDanarbuiErfdafjarskatt": {
       "post": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "UpplysingarUrDanarbuiErfdafjarskatt_Post",
-        "consumes": ["application/json", "text/json", "application/*+json"],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
         "parameters": [
           {
             "name": "fyrirspurn",
@@ -1632,9 +1756,15 @@
     },
     "/v1/Danarbu/YfirlitUmFramvinduSkipta": {
       "post": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "YfirlitUmFramvinduSkipta_Post",
-        "consumes": ["application/json", "text/json", "application/*+json"],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
         "parameters": [
           {
             "name": "fyrirspurn",
@@ -1674,7 +1804,9 @@
     },
     "/api/Fasteignasalar": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "Fasteignasalar_Get",
         "parameters": [
           {
@@ -1705,7 +1837,9 @@
     },
     "/api/AlmennFyrirspurn/{audkenni}/{eining}/{adgerd}": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "AlmennFyrirspurn_Get",
         "parameters": [
           {
@@ -1762,7 +1896,9 @@
     },
     "/api/EinstaklingaSkra/{audkenni}/{kennitala}": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "EinstaklingaSkra_Get",
         "parameters": [
           {
@@ -1819,7 +1955,9 @@
     },
     "/api/ErfdarskraJaNei/{kennitala}/{audkenni}": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "ErfdarskraJaNei_Get",
         "parameters": [
           {
@@ -1876,7 +2014,9 @@
     },
     "/api/FaVottordUpplysingar/{audkenni}/{kennitala}": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "FaVottordUpplysingar_Get",
         "parameters": [
           {
@@ -1912,9 +2052,15 @@
     },
     "/api/Innsiglun": {
       "post": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "Innsiglun_Post",
-        "consumes": ["application/json", "text/json", "application/*+json"],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
         "parameters": [
           {
             "name": "skeyti",
@@ -1944,7 +2090,9 @@
     },
     "/api/KannaRafraenSkilriki/{simi}/{kennitala}/{audkenni}": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "KannaRafraenSkilriki_Get",
         "parameters": [
           {
@@ -2008,7 +2156,9 @@
     },
     "/api/KannaRafraenSkilriki/{kennitala}/{audkenni}": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "KannaRafraenSkilriki_Get2",
         "parameters": [
           {
@@ -2065,7 +2215,9 @@
     },
     "/api/KannaSakavottord/{audkenni}/{kennitala}": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "KannaSakavottord_Get",
         "parameters": [
           {
@@ -2111,7 +2263,9 @@
     },
     "/api/KaupmaliJaNei/{kennitala}/{audkenni}": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "KaupmaliJaNei_Get",
         "parameters": [
           {
@@ -2168,9 +2322,15 @@
     },
     "/api/LeitaAdKennitoluIThjodskra": {
       "post": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "LeitaAdKennitoluIThjodskra_Post",
-        "consumes": ["application/json", "text/json", "application/*+json"],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
         "parameters": [
           {
             "name": "skeyti",
@@ -2207,7 +2367,9 @@
     },
     "/api/Logadilaskra/{kennitalaEdaNafnEdaHeimlisfang}/{audkenni}": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "Logadilaskra_Get",
         "parameters": [
           {
@@ -2264,9 +2426,15 @@
     },
     "/v1/Almennt/MottakaRafraentSkjal": {
       "post": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "MottakaRafraentSkjal_Post",
-        "consumes": ["application/json", "text/json", "application/*+json"],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
         "parameters": [
           {
             "name": "payload",
@@ -2306,9 +2474,15 @@
     },
     "/v1/Almennt/MottakaSkjalaUrUndirritun": {
       "post": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "MottakaSkjalaUrUndirritun_Post",
-        "consumes": ["application/json", "text/json", "application/*+json"],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
         "parameters": [
           {
             "name": "payload",
@@ -2348,7 +2522,9 @@
     },
     "/v1/Ping": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "Ping_Get",
         "responses": {
           "200": {
@@ -2369,9 +2545,15 @@
         ]
       },
       "post": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "Ping_Post",
-        "consumes": ["application/json", "text/json", "application/*+json"],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
         "parameters": [
           {
             "name": "skilabod",
@@ -2411,7 +2593,9 @@
     },
     "/RettindiFyrirIslandIs/RettindiFyrirIslandIs": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "RettindiFyrirIslandIs_Get",
         "responses": {
           "200": {
@@ -2452,7 +2636,9 @@
     },
     "/RettindiFyrirIslandIs/RettindiFyrirIslandIs/{audkenni}": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "RettindiFyrirIslandIs_GetStakt",
         "parameters": [
           {
@@ -2508,7 +2694,9 @@
     },
     "/api/SamkynjaTolfraedi/{audkenni}": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "SamkynjaTolfraedi_Get",
         "parameters": [
           {
@@ -2552,9 +2740,15 @@
     },
     "/v1/SkraMottakaGogn": {
       "post": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "SkraMottakaGogn_Post",
-        "consumes": ["application/json", "text/json", "application/*+json"],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
         "parameters": [
           {
             "name": "payload",
@@ -2584,9 +2778,15 @@
     },
     "/api/StadaUndirritunarSkjals": {
       "post": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "StadaUndirritunarSkjals_Post",
-        "consumes": ["application/json", "text/json", "application/*+json"],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
         "parameters": [
           {
             "name": "payload",
@@ -2616,7 +2816,9 @@
     },
     "/api/StaediskortaMal/GetStaediskort": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "StaediskortaMal_GetStaediskort",
         "parameters": [
           {
@@ -2651,7 +2853,9 @@
     },
     "/api/StaediskortaMal/GetStaediskortToken": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "StaediskortaMal_GetStaediskortToken",
         "responses": {
           "200": {
@@ -2678,9 +2882,15 @@
     },
     "/api/StofnaskjalOgSendaTilUndirritunar": {
       "post": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "StofnaskjalOgSendaTilUndirritunar_Post",
-        "consumes": ["application/json", "text/json", "application/*+json"],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
         "parameters": [
           {
             "name": "payload",
@@ -2710,9 +2920,15 @@
     },
     "/api/v1/SyslMottakaGogn": {
       "post": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "SyslMottakaGogn_Post",
-        "consumes": ["application/json", "text/json", "application/*+json"],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
         "parameters": [
           {
             "name": "payload",
@@ -2742,9 +2958,15 @@
     },
     "/api/v1/SyslMottakaVilluprofaGogn": {
       "post": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "SyslMottakaVilluprofaGogn_Post",
-        "consumes": ["application/json", "text/json", "application/*+json"],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
         "parameters": [
           {
             "name": "payload",
@@ -2774,9 +2996,15 @@
     },
     "/api/SyslSaekjaSkra": {
       "post": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "SyslSaekjaSkra_Post",
-        "consumes": ["application/json", "text/json", "application/*+json"],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
         "parameters": [
           {
             "name": "payload",
@@ -2816,9 +3044,15 @@
     },
     "/api/Vedbokarvottord2": {
       "post": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "Vedbokarvottord2_Post",
-        "consumes": ["application/json", "text/json", "application/*+json"],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
         "parameters": [
           {
             "name": "skilabod",
@@ -2855,9 +3089,15 @@
     },
     "/api/Vedbokarvottord": {
       "post": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "Vedbokarvottord_Post",
-        "consumes": ["application/json", "text/json", "application/*+json"],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
         "parameters": [
           {
             "name": "skilabod",
@@ -2894,9 +3134,15 @@
     },
     "/api/Vedbokavottord2Regluverki": {
       "post": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "Vedbokavottord2Regluverki_Post",
-        "consumes": ["application/json", "text/json", "application/*+json"],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
         "parameters": [
           {
             "name": "skilabod",
@@ -2939,9 +3185,15 @@
     },
     "/api/VedbokavottordRegluverki": {
       "post": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "VedbokavottordRegluverki_Post",
-        "consumes": ["application/json", "text/json", "application/*+json"],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
         "parameters": [
           {
             "name": "skilabod",
@@ -2984,7 +3236,9 @@
     },
     "/api/Verdbrefamidlarar/{audkenni}": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "Verdbrefamidlarar_Get",
         "parameters": [
           {
@@ -3030,7 +3284,9 @@
     },
     "/Version": {
       "get": {
-        "tags": ["Syslumenn"],
+        "tags": [
+          "Syslumenn"
+        ],
         "operationId": "Version_Get",
         "responses": {
           "200": {
@@ -3082,7 +3338,9 @@
     },
     "Postnumer": {
       "type": "object",
-      "required": ["oid"],
+      "required": [
+        "oid"
+      ],
       "properties": {
         "oid": {
           "type": "integer",
@@ -3145,7 +3403,9 @@
     },
     "SkraSveinsbrefModel": {
       "type": "object",
-      "required": ["stadidFallid"],
+      "required": [
+        "stadidFallid"
+      ],
       "properties": {
         "audkenni": {
           "type": "string"
@@ -3194,7 +3454,9 @@
     },
     "AdfarabeidnirHeimildaflokkur": {
       "type": "object",
-      "required": ["numer"],
+      "required": [
+        "numer"
+      ],
       "properties": {
         "numer": {
           "type": "integer",
@@ -3207,7 +3469,9 @@
     },
     "Embaetti": {
       "type": "object",
-      "required": ["numer"],
+      "required": [
+        "numer"
+      ],
       "properties": {
         "numer": {
           "type": "integer",
@@ -3243,7 +3507,10 @@
     },
     "Okutaeki": {
       "type": "object",
-      "required": ["skraningardagur", "skraningardagurEiganda"],
+      "required": [
+        "skraningardagur",
+        "skraningardagurEiganda"
+      ],
       "properties": {
         "numerOkutaekis": {
           "type": "string"
@@ -3452,7 +3719,9 @@
     },
     "VirkLeyfi": {
       "type": "object",
-      "required": ["rowNum"],
+      "required": [
+        "rowNum"
+      ],
       "properties": {
         "rowNum": {
           "type": "integer",
@@ -3529,7 +3798,9 @@
     },
     "VirkLeyfiMedfastanumer": {
       "type": "object",
-      "required": ["rowNum"],
+      "required": [
+        "rowNum"
+      ],
       "properties": {
         "rowNum": {
           "type": "integer",
@@ -3668,7 +3939,9 @@
     },
     "AranuslausSvar": {
       "type": "object",
-      "required": ["fraDags"],
+      "required": [
+        "fraDags"
+      ],
       "properties": {
         "fraDags": {
           "type": "string",
@@ -3687,7 +3960,9 @@
     },
     "AranguslausFjarnamMal": {
       "type": "object",
-      "required": ["dags"],
+      "required": [
+        "dags"
+      ],
       "properties": {
         "malsnumer": {
           "type": "string"
@@ -3719,7 +3994,9 @@
     },
     "AranuslausFyrirspurn": {
       "type": "object",
-      "required": ["fraDags"],
+      "required": [
+        "fraDags"
+      ],
       "properties": {
         "fraDags": {
           "type": "string",
@@ -3818,7 +4095,10 @@
     },
     "AdfaraAdili": {
       "type": "object",
-      "required": ["notarKyn", "kyn"],
+      "required": [
+        "notarKyn",
+        "kyn"
+      ],
       "properties": {
         "kennitala": {
           "type": "string"
@@ -3846,7 +4126,9 @@
     },
     "AdfaraKrofulysing": {
       "type": "object",
-      "required": ["upphaed"],
+      "required": [
+        "upphaed"
+      ],
       "properties": {
         "lysing": {
           "type": "string"
@@ -3887,7 +4169,9 @@
     },
     "UppbodFasteignir": {
       "type": "object",
-      "required": ["dagsUppbods"],
+      "required": [
+        "dagsUppbods"
+      ],
       "properties": {
         "lysing": {
           "type": "string"
@@ -3920,7 +4204,10 @@
     },
     "AranuslausFraTilSvar": {
       "type": "object",
-      "required": ["fraDags", "tilDags"],
+      "required": [
+        "fraDags",
+        "tilDags"
+      ],
       "properties": {
         "fraDags": {
           "type": "string",
@@ -3943,7 +4230,10 @@
     },
     "AranuslausFratilFyrirspurn": {
       "type": "object",
-      "required": ["fraDags", "tilDags"],
+      "required": [
+        "fraDags",
+        "tilDags"
+      ],
       "properties": {
         "fraDags": {
           "type": "string",
@@ -3982,7 +4272,10 @@
     },
     "Stadavidskiptamanns": {
       "type": "object",
-      "required": ["keyrsluDags", "dagsetningYfirlits"],
+      "required": [
+        "keyrsluDags",
+        "dagsetningYfirlits"
+      ],
       "properties": {
         "kennitala": {
           "type": "string"
@@ -4065,7 +4358,10 @@
     },
     "AbyrgdVegna3jaAdila": {
       "type": "object",
-      "required": ["tegund", "stadaISK"],
+      "required": [
+        "tegund",
+        "stadaISK"
+      ],
       "properties": {
         "audkenni": {
           "type": "string"
@@ -4096,7 +4392,10 @@
     },
     "Hlutabref": {
       "type": "object",
-      "required": ["stadaISK", "erSkradAMarkad"],
+      "required": [
+        "stadaISK",
+        "erSkradAMarkad"
+      ],
       "properties": {
         "audkenni": {
           "type": "string"
@@ -4115,7 +4414,9 @@
     },
     "InnheimtuSkuldabref": {
       "type": "object",
-      "required": ["stadaIsk"],
+      "required": [
+        "stadaIsk"
+      ],
       "properties": {
         "audkenni": {
           "type": "string"
@@ -4131,7 +4432,11 @@
     },
     "InnistaedaIBonkumOgSparisjodum": {
       "type": "object",
-      "required": ["stadaISK", "afallnirVextirISK", "stadaSamtalsISK"],
+      "required": [
+        "stadaISK",
+        "afallnirVextirISK",
+        "stadaSamtalsISK"
+      ],
       "properties": {
         "audkenni": {
           "type": "string"
@@ -4155,7 +4460,9 @@
     },
     "Sjodir": {
       "type": "object",
-      "required": ["stadaISK"],
+      "required": [
+        "stadaISK"
+      ],
       "properties": {
         "audkenni": {
           "type": "string"
@@ -4185,7 +4492,9 @@
     },
     "Skuldabref": {
       "type": "object",
-      "required": ["stadaIsk"],
+      "required": [
+        "stadaIsk"
+      ],
       "properties": {
         "audkenni": {
           "type": "string"
@@ -4201,7 +4510,10 @@
     },
     "StadaKreditkorta": {
       "type": "object",
-      "required": ["inneignISK", "skuldISK"],
+      "required": [
+        "inneignISK",
+        "skuldISK"
+      ],
       "properties": {
         "audkenni": {
           "type": "string"
@@ -4218,7 +4530,9 @@
     },
     "Tryggingarbref": {
       "type": "object",
-      "required": ["stadaISK"],
+      "required": [
+        "stadaISK"
+      ],
       "properties": {
         "audkenni": {
           "type": "string"
@@ -4237,7 +4551,9 @@
     },
     "Utlan": {
       "type": "object",
-      "required": ["stadaISK"],
+      "required": [
+        "stadaISK"
+      ],
       "properties": {
         "audkenni": {
           "type": "string"
@@ -4256,7 +4572,10 @@
     },
     "AlgengTengsl": {
       "type": "object",
-      "required": ["oid", "virk"],
+      "required": [
+        "oid",
+        "virk"
+      ],
       "properties": {
         "oid": {
           "type": "integer",
@@ -4272,7 +4591,9 @@
     },
     "AlgengUmsaekjandaTengsl": {
       "type": "object",
-      "required": ["oid"],
+      "required": [
+        "oid"
+      ],
       "properties": {
         "oid": {
           "type": "integer",
@@ -4285,7 +4606,11 @@
     },
     "ErfdafjarskatturSvar": {
       "type": "object",
-      "required": ["gildirFra", "erfdafjarskattur", "skattfrelsismorkUpphaed"],
+      "required": [
+        "gildirFra",
+        "erfdafjarskattur",
+        "skattfrelsismorkUpphaed"
+      ],
       "properties": {
         "gildirFra": {
           "type": "string",
@@ -4418,7 +4743,10 @@
     },
     "EignirDanarbus": {
       "type": "object",
-      "required": ["tegundAngalgs", "eignarhlutfall"],
+      "required": [
+        "tegundAngalgs",
+        "eignarhlutfall"
+      ],
       "properties": {
         "tegundAngalgs": {
           "$ref": "#/definitions/TegundAndlags"
@@ -4472,8 +4800,28 @@
         "Yfirdrattur"
       ],
       "enum": [
-        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-        20, 21
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
       ]
     },
     "UpplysingarUrDanarbuiRadstofunSkeyti": {
@@ -4511,11 +4859,19 @@
         "SetaiOskiptuBui",
         "Einkaskipti"
       ],
-      "enum": [0, 1, 2, 3]
+      "enum": [
+        0,
+        1,
+        2,
+        3
+      ]
     },
     "DanarbuUpplRadstofun": {
       "type": "object",
-      "required": ["kaupmali", "erfdakraVitneskja"],
+      "required": [
+        "kaupmali",
+        "erfdakraVitneskja"
+      ],
       "properties": {
         "malsnumer": {
           "type": "string"
@@ -4620,7 +4976,12 @@
         "SetaiOskiptuBui",
         "Einkaskipti"
       ],
-      "enum": [0, 1, 2, 3]
+      "enum": [
+        0,
+        1,
+        2,
+        3
+      ]
     },
     "Fyrirspurn": {
       "type": "object",
@@ -4652,7 +5013,10 @@
     },
     "DanarbuUppl": {
       "type": "object",
-      "required": ["kaupmali", "erfdakraVitneskja"],
+      "required": [
+        "kaupmali",
+        "erfdakraVitneskja"
+      ],
       "properties": {
         "malsnumer": {
           "type": "string"
@@ -4712,7 +5076,10 @@
     },
     "DanarbuUpplErfdafjarskatt": {
       "type": "object",
-      "required": ["kaupmali", "erfdakraVitneskja"],
+      "required": [
+        "kaupmali",
+        "erfdakraVitneskja"
+      ],
       "properties": {
         "malsnumer": {
           "type": "string"
@@ -4755,7 +5122,10 @@
     },
     "EignirDanarbusErfdafjarskatt": {
       "type": "object",
-      "required": ["tegundAngalgs", "eignarhlutfall"],
+      "required": [
+        "tegundAngalgs",
+        "eignarhlutfall"
+      ],
       "properties": {
         "tegundAngalgs": {
           "$ref": "#/definitions/TegundAndlags"
@@ -4794,7 +5164,9 @@
     },
     "ThjoldskraEnstaklingar": {
       "type": "object",
-      "required": ["faedD"],
+      "required": [
+        "faedD"
+      ],
       "properties": {
         "stada": {
           "type": "string"
@@ -4939,7 +5311,9 @@
     },
     "KannaRafraenSkilrikiKennitala": {
       "type": "object",
-      "required": ["dagsetning"],
+      "required": [
+        "dagsetning"
+      ],
       "properties": {
         "kennitala": {
           "type": "string"
@@ -4955,7 +5329,11 @@
     },
     "ActiveCertsModel": {
       "type": "object",
-      "required": ["simi", "app", "kort"],
+      "required": [
+        "simi",
+        "app",
+        "kort"
+      ],
       "properties": {
         "simi": {
           "type": "boolean"
@@ -4978,7 +5356,9 @@
     },
     "ThjodskraSvarSkeyti": {
       "type": "object",
-      "required": ["kynkodi"],
+      "required": [
+        "kynkodi"
+      ],
       "properties": {
         "stada": {
           "type": "string"
@@ -5023,7 +5403,10 @@
     },
     "ThjodskraLogadilar": {
       "type": "object",
-      "required": ["erBrottfellt", "bannmerking"],
+      "required": [
+        "erBrottfellt",
+        "bannmerking"
+      ],
       "properties": {
         "kennitala": {
           "type": "string"
@@ -5087,7 +5470,9 @@
     },
     "WebhookEventPayload": {
       "type": "object",
-      "required": ["id"],
+      "required": [
+        "id"
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -5103,7 +5488,9 @@
     },
     "SignedDocumentEventData": {
       "type": "object",
-      "required": ["eventType"],
+      "required": [
+        "eventType"
+      ],
       "properties": {
         "flowKey": {
           "type": "string"
@@ -5139,7 +5526,10 @@
     },
     "Signee": {
       "type": "object",
-      "required": ["signed", "communicationDeliveryType"],
+      "required": [
+        "signed",
+        "communicationDeliveryType"
+      ],
       "properties": {
         "name": {
           "type": "string"
@@ -5191,12 +5581,19 @@
     "EventType": {
       "type": "integer",
       "description": "0 = AllSigned",
-      "x-enumNames": ["AllSigned"],
-      "enum": [0]
+      "x-enumNames": [
+        "AllSigned"
+      ],
+      "enum": [
+        0
+      ]
     },
     "EventSignature": {
       "type": "object",
-      "required": ["timeStamp", "guid"],
+      "required": [
+        "timeStamp",
+        "guid"
+      ],
       "properties": {
         "timeStamp": {
           "type": "integer",
@@ -5423,7 +5820,10 @@
     },
     "Adili": {
       "type": "object",
-      "required": ["undirritad", "tegund"],
+      "required": [
+        "undirritad",
+        "tegund"
+      ],
       "properties": {
         "id": {
           "type": "string"
@@ -5460,8 +5860,16 @@
     "AdiliTegund": {
       "type": "integer",
       "description": "0 = Malshefjandi\n1 = Gagnadili\n2 = Barn",
-      "x-enumNames": ["Malshefjandi", "Gagnadili", "Barn"],
-      "enum": [0, 1, 2]
+      "x-enumNames": [
+        "Malshefjandi",
+        "Gagnadili",
+        "Barn"
+      ],
+      "enum": [
+        0,
+        1,
+        2
+      ]
     },
     "VidhengiSkra": {
       "type": "object",
@@ -5476,7 +5884,9 @@
     },
     "StadaUndirritunarSkjalsSvarSkeyti": {
       "type": "object",
-      "required": ["stadaUndirritunar"],
+      "required": [
+        "stadaUndirritunar"
+      ],
       "properties": {
         "audkenni": {
           "type": "string"
@@ -5499,7 +5909,13 @@
         "EkkiUndirritadVilla",
         "EkkiUndirritadUtrunnid"
       ],
-      "enum": [0, 1, 2, 3, 4]
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
     },
     "StadaUndirritunarSkjalsSkeyti": {
       "type": "object",
@@ -5587,7 +6003,9 @@
     },
     "StofnaskjalOgSendaTilUndirritunarSkeyti": {
       "type": "object",
-      "required": ["gildirTil"],
+      "required": [
+        "gildirTil"
+      ],
       "properties": {
         "audkenni": {
           "type": "string"
@@ -5643,7 +6061,9 @@
     },
     "VedbandayfirlitMargirSkeyti": {
       "type": "object",
-      "required": ["tegundAndlags"],
+      "required": [
+        "tegundAndlags"
+      ],
       "properties": {
         "audkenni": {
           "type": "string"
@@ -5670,11 +6090,20 @@
         "Loftfar",
         "Oskrad"
       ],
-      "enum": [0, 1, 2, 3, 4, 5]
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
     },
     "VedbandayfirlitSkeyti": {
       "type": "object",
-      "required": ["tegundAndlags"],
+      "required": [
+        "tegundAndlags"
+      ],
       "properties": {
         "audkenni": {
           "type": "string"
@@ -5689,7 +6118,9 @@
     },
     "VedbandayfirlitReguverkiSvarSkeyti": {
       "type": "object",
-      "required": ["landNr"],
+      "required": [
+        "landNr"
+      ],
       "properties": {
         "fastnum": {
           "type": "string"

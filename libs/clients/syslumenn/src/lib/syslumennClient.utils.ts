@@ -90,7 +90,7 @@ export const mapAllPropertiesDetailResponse = (
   return {
     propertyNumber: response.fastnum,
     defaultAddress: {
-      display: response.heiti,
+      display: response?.heiti,
     },
     unitsOfUse: {
       unitsOfUse: [
@@ -339,7 +339,7 @@ function mapPersonEnum(e: PersonType) {
 export const mapAssetName = (
   response: VedbandayfirlitReguverkiSvarSkeyti,
 ): AssetName => {
-  return { name: response.heiti ?? '' }
+  return { name: response?.heiti ?? '' }
 }
 
 export const mapVehicle = (response: Okutaeki): VehicleRegistration => {

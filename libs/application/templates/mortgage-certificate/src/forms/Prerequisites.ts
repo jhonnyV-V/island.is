@@ -3,8 +3,10 @@ import {
   buildSection,
   buildExternalDataProvider,
   buildDataProviderItem,
+  buildSubmitField,
+  coreMessages,
 } from '@island.is/application/core'
-import { Form, FormModes } from '@island.is/application/types'
+import { DefaultEvents, Form, FormModes } from '@island.is/application/types'
 import {
   IdentityApi,
   UserProfileApi,
@@ -30,6 +32,19 @@ export const PrerequisitesForm: Form = buildForm({
           id: 'approveExternalData',
           subTitle: externalData.general.subTitle,
           checkboxLabel: externalData.general.checkboxLabel,
+          submitField: buildSubmitField({
+            id: 'submit',
+            placement: 'footer',
+            title: '',
+            refetchApplicationAfterSubmit: true,
+            actions: [
+              {
+                event: DefaultEvents.SUBMIT,
+                name: coreMessages.buttonNext,
+                type: 'primary',
+              },
+            ],
+          }),
           dataProviders: [
             buildDataProviderItem({
               provider: IdentityApi,

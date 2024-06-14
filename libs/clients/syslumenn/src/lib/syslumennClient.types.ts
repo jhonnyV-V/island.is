@@ -343,6 +343,43 @@ export interface PropertyDetail {
   unitsOfUse?: UnitsOfUseModel
 }
 
+export interface ManyPropertyDetail {
+  propertyNumber: string
+  propertyType: string
+  realEstate?: Array<RealEstateDetail>
+  vehicle?: Array<VehicleDetail>
+  ship?: Array<ShipDetail>
+}
+
+interface RealEstateDetail {
+  propertyNumber: string
+  landNumber: string
+  name: string
+  defaultAdress: string
+}
+
+interface VehicleDetail {
+  licencePlate: string
+  propertyNumber: string
+  manufacturer: string
+  manufacturerType: string
+  color: string
+  dateOfRegistration: string
+}
+
+interface ShipDetail {
+  shipRegistrationNumber: string
+  usageType: string
+  name: string
+  initialRegistrationDate: string
+  mainMeasurements: ShipMeasurements
+}
+
+interface ShipMeasurements {
+  length: string
+  bruttoWeightTons: string
+}
+
 interface PropertyLocation {
   display?: string
 }
